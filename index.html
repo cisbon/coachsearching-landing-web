@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoachSearching - Lifetime Free Access for Early-Bird Coaches</title>
+
+    <style>
+        /* ===========================
+           CSS Reset & Base Styles
+        =========================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Brand Colors */
+            --primary-petrol: #006266;
+            --petrol-light: #008B8F;
+            --petrol-dark: #004A4D;
+            --petrol-bg-light: #E6F3F4;
+            --accent-coral: #FF6B6B;
+
+            /* Neutral Colors */
+            --text-dark: #1A1A1A;
+            --text-gray: #4A5568;
+            --bg-white: #FFFFFF;
+            --bg-light: #F7FAFC;
+
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+
+            /* Spacing */
+            --section-padding: 80px 20px;
+            --container-max-width: 1200px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-white);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===========================
+           Typography
+        =========================== */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text-dark);
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1.25rem;
+        }
+
+        h3 {
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 1rem;
+        }
+
+        /* ===========================
+           Layout Components
+        =========================== */
+        .container {
+            max-width: var(--container-max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            padding: var(--section-padding);
+        }
+
+        /* ===========================
+           Header & Navigation
+        =========================== */
+        .header {
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-petrol);
+            text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--petrol-light);
+        }
+
+        /* ===========================
+           Buttons
+        =========================== */
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-petrol);
+            color: var(--bg-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--petrol-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 98, 102, 0.3);
+        }
+
+        .btn-large {
+            padding: 18px 40px;
+            font-size: 1.125rem;
+        }
+
+        /* ===========================
+           Hero Section
+        =========================== */
+        .hero {
+            background: linear-gradient(135deg, var(--petrol-bg-light) 0%, var(--bg-white) 100%);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: var(--primary-petrol);
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--accent-coral);
+            color: var(--bg-white);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===========================
+           Value Proposition Section
+        =========================== */
+        .value-section {
+            background-color: var(--bg-white);
+        }
+
+        .value-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .benefit-card {
+            background: var(--bg-light);
+            padding: 40px 30px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--petrol-light);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 98, 102, 0.1);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .benefit-card h3 {
+            color: var(--primary-petrol);
+            margin-bottom: 15px;
+        }
+
+        .benefit-card p {
+            font-size: 1rem;
+            color: var(--text-gray);
+        }
+
+        /* ===========================
+           Sign-Up Section
+        =========================== */
+        .signup-section {
+            background: linear-gradient(135deg, var(--primary-petrol) 0%, var(--petrol-light) 100%);
+            color: var(--bg-white);
+        }
+
+        .signup-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .signup-section h2 {
+            color: var(--bg-white);
+        }
+
+        .signup-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+        }
+
+        /* ===========================
+           Form Styles
+        =========================== */
+        .form-container {
+            background-color: var(--bg-white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 1rem;
+            border: 2px solid #E2E8F0;
+            border-radius: 8px;
+            font-family: var(--font-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-petrol);
+            box-shadow: 0 0 0 3px rgba(0, 98, 102, 0.1);
+        }
+
+        .form-note {
+            font-size: 0.875rem;
+            color: var(--text-gray);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+
+        .form-note a {
+            color: var(--primary-petrol);
+            text-decoration: none;
+        }
+
+        .form-note a:hover {
+            text-decoration: underline;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .error-message {
+            background-color: #FEE2E2;
+            color: #991B1B;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #D1FAE5;
+            color: #065F46;
+            padding: 12px 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* ===========================
+           Footer
+        =========================== */
+        .footer {
+            background-color: var(--text-dark);
+            color: var(--bg-white);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+        }
+
+        /* ===========================
+           Responsive Design
+        =========================== */
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 20px;
+            }
+
+            .hero {
+                padding: 80px 20px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .form-container {
+                padding: 30px 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        /* ===========================
+           Utility Classes
+        =========================== */
+        .text-center {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- ===========================
+         HEADER / NAVIGATION
+    =========================== -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">coach<span>searching</span>.com</a>
+                <a href="#signup" class="btn btn-primary">Join Early Bird Program</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===========================
+         HERO SECTION
+    =========================== -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">⏰ Limited Time Offer</div>
+            <h1>Build Your Coaching Practice with Lifetime Free Access</h1>
+            <p class="hero-subtitle">
+                Join the exclusive early-bird program for coaches and secure your permanent,
+                free listing on our professional coaching platform. Get discovered by clients
+                while gaining the certification hours you need.
+            </p>
+            <a href="#signup" class="btn btn-primary btn-large">Claim Your Free Spot</a>
+        </div>
+    </section>
+
+    <!-- ===========================
+         VALUE PROPOSITION SECTION
+    =========================== -->
+    <section class="section value-section">
+        <div class="container">
+            <div class="value-content">
+                <h2>Why Join CoachSearching as an Early-Bird Coach?</h2>
+                <p>
+                    We're building a premium platform that connects coaches with clients who
+                    value quality. As an early-bird member, you'll receive exclusive benefits
+                    that will accelerate your coaching career.
+                </p>
+
+                <div class="benefits-grid">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🎯</div>
+                        <h3>Lifetime Free Listing</h3>
+                        <p>
+                            Lock in your profile on our platform forever—no subscription fees,
+                            no hidden costs. Your early trust in us is rewarded with permanent access.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">⭐</div>
+                        <h3>Pro-Bono Opportunities</h3>
+                        <p>
+                            Get invited by certified coach trainers to provide pro-bono sessions.
+                            Earn the certification hours you need while helping others and building
+                            your reputation.
+                        </p>
+                    </div>
+
+                    <div class="benefit-card">
+                        <div class="benefit-icon">🚀</div>
+                        <h3>Professional Visibility</h3>
+                        <p>
+                            Showcase your expertise to clients actively searching for coaches.
+                            Our quality-focused platform ensures you connect with serious coachees.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         SIGN-UP SECTION
+    =========================== -->
+    <section id="signup" class="section signup-section">
+        <div class="container">
+            <div class="signup-content">
+                <h2>Claim Your Lifetime Free Access</h2>
+                <p>
+                    This exclusive offer is only available to coaches invited by certified
+                    trainers. Complete the form below to secure your spot. All applications
+                    are manually reviewed to maintain our high-quality standards.
+                </p>
+
+                <div class="form-container">
+                    <div id="errorMessage" class="error-message"></div>
+                    <div id="successMessage" class="success-message"></div>
+
+                    <form id="signupForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                class="form-input"
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                class="form-input"
+                                placeholder="your@email.com"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="socialLink" class="form-label">Social Profile Link *</label>
+                            <input
+                                type="url"
+                                id="socialLink"
+                                name="socialLink"
+                                class="form-input"
+                                placeholder="https://linkedin.com/in/yourprofile"
+                                required
+                            >
+                            <p class="form-note">
+                                Provide a link to your LinkedIn, professional website, or coaching profile
+                            </p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inviteCode" class="form-label">Invitation Code *</label>
+                            <input
+                                type="text"
+                                id="inviteCode"
+                                name="inviteCode"
+                                class="form-input"
+                                placeholder="Enter your invitation code"
+                                required
+                            >
+                            <p class="form-note">
+                                Required for verification. Don't have one? Please get invited by a
+                                certified coach trainer.
+                            </p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large form-submit">
+                            Claim My Lifetime Free Access
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===========================
+         FOOTER
+    =========================== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 CoachSearching.com - All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ===========================
+         JAVASCRIPT
+    =========================== -->
+    <script>
+        // ===========================
+        // CONFIGURATION
+        // ===========================
+
+        // IMPORTANT: Replace these with your actual Supabase project credentials
+        // Get these from: https://app.supabase.com/project/_/settings/api
+        const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL'; // e.g., 'https://xyzcompany.supabase.co'
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Your public anon key
+
+        // ===========================
+        // SUPABASE CLIENT (CDN-free implementation)
+        // ===========================
+
+        // Simple Supabase client without external dependencies
+        class SimpleSupabaseClient {
+            constructor(supabaseUrl, supabaseKey) {
+                this.supabaseUrl = supabaseUrl;
+                this.supabaseKey = supabaseKey;
+                this.headers = {
+                    'apikey': supabaseKey,
+                    'Authorization': `Bearer ${supabaseKey}`,
+                    'Content-Type': 'application/json'
+                };
+            }
+
+            async signUp(email, password, metadata = {}) {
+                const response = await fetch(`${this.supabaseUrl}/auth/v1/signup`, {
+                    method: 'POST',
+                    headers: this.headers,
+                    body: JSON.stringify({
+                        email,
+                        password,
+                        data: metadata
+                    })
+                });
+
+                return await response.json();
+            }
+
+            async insert(table, data) {
+                const response = await fetch(`${this.supabaseUrl}/rest/v1/${table}`, {
+                    method: 'POST',
+                    headers: {
+                        ...this.headers,
+                        'Prefer': 'return=representation'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Database error');
+                }
+
+                return await response.json();
+            }
+
+            async select(table, query = {}) {
+                let url = `${this.supabaseUrl}/rest/v1/${table}`;
+                const params = new URLSearchParams();
+
+                if (query.select) params.append('select', query.select);
+                if (query.eq) {
+                    Object.entries(query.eq).forEach(([key, value]) => {
+                        params.append(key, `eq.${value}`);
+                    });
+                }
+
+                const queryString = params.toString();
+                if (queryString) url += `?${queryString}`;
+
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: this.headers
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.message || 'Database error');
+                }
+
+                return await response.json();
+            }
+        }
+
+        // Initialize Supabase client
+        let supabase = null;
+
+        // Check if credentials are configured
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
+            supabase = new SimpleSupabaseClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // ===========================
+        // FORM HANDLING
+        // ===========================
+
+        const form = document.getElementById('signupForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+
+            // Scroll to error
+            errorMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+
+            // Scroll to success
+            successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Hide all messages
+        function hideMessages() {
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        }
+
+        // Validate invitation code
+        async function validateInviteCode(code) {
+            if (!supabase) {
+                // If Supabase is not configured, show demo mode message
+                console.log('Demo mode: Skipping invite code validation');
+                return true;
+            }
+
+            try {
+                const result = await supabase.select('invite_codes', {
+                    eq: { code: code, is_active: true }
+                });
+
+                return result && result.length > 0;
+            } catch (error) {
+                console.error('Error validating invite code:', error);
+                throw new Error('Unable to validate invitation code. Please try again.');
+            }
+        }
+
+        // Handle form submission
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            hideMessages();
+
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const socialLink = document.getElementById('socialLink').value.trim();
+            const inviteCode = document.getElementById('inviteCode').value.trim();
+
+            // Basic validation
+            if (!name || !email || !socialLink || !inviteCode) {
+                showError('Please fill in all required fields.');
+                return;
+            }
+
+            // Validate email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Please enter a valid email address.');
+                return;
+            }
+
+            // Validate URL format
+            try {
+                new URL(socialLink);
+            } catch {
+                showError('Please enter a valid URL for your social profile.');
+                return;
+            }
+
+            // Check if Supabase is configured
+            if (!supabase) {
+                showError('Configuration error: Supabase credentials are not set. Please configure SUPABASE_URL and SUPABASE_ANON_KEY in the JavaScript section of this file.');
+                return;
+            }
+
+            // Disable form during submission
+            form.classList.add('loading');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Processing...';
+            submitButton.disabled = true;
+
+            try {
+                // Step 1: Validate invitation code
+                const isValidCode = await validateInviteCode(inviteCode);
+                if (!isValidCode) {
+                    showError('Invalid invitation code. Please check your code and try again, or contact a certified coach trainer for an invitation.');
+                    return;
+                }
+
+                // Step 2: Create auth user with a random password (user will reset via email)
+                const randomPassword = Math.random().toString(36).slice(-12) + 'Aa1!';
+                const authResult = await supabase.signUp(email, randomPassword, {
+                    full_name: name
+                });
+
+                if (authResult.error) {
+                    throw new Error(authResult.error.message || 'Failed to create account');
+                }
+
+                // Step 3: Insert coach data into database
+                const coachData = {
+                    name: name,
+                    email: email,
+                    social_link: socialLink,
+                    invite_code: inviteCode,
+                    approved: false, // Requires manual approval
+                    user_id: authResult.data?.user?.id || null
+                };
+
+                await supabase.insert('coaches', coachData);
+
+                // Step 4: Show success message
+                showSuccess(
+                    '🎉 Success! Your application has been submitted and is pending manual approval. ' +
+                    'You will receive an email notification once your account is approved. ' +
+                    'Thank you for joining CoachSearching!'
+                );
+
+                // Reset form
+                form.reset();
+
+            } catch (error) {
+                console.error('Signup error:', error);
+
+                let errorMsg = 'An error occurred during signup. Please try again.';
+
+                if (error.message.includes('already registered')) {
+                    errorMsg = 'This email is already registered. Please use a different email or contact support.';
+                } else if (error.message) {
+                    errorMsg = error.message;
+                }
+
+                showError(errorMsg);
+
+            } finally {
+                // Re-enable form
+                form.classList.remove('loading');
+                submitButton.textContent = originalButtonText;
+                submitButton.disabled = false;
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
