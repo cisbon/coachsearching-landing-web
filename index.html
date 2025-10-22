@@ -1226,8 +1226,8 @@
 
         // IMPORTANT: Replace these with your actual Supabase project credentials
         // Get these from: https://app.supabase.com/project/_/settings/api
-        const SUPABASE_URL = 'https://kzyeanhtiwyrtiyqgawh.supabase.co'; // e.g., 'https://xyzcompany.supabase.co'
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt6eWVhbmh0aXd5cnRpeXFnYXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExMjIxNDEsImV4cCI6MjA3NjY5ODE0MX0.Y-IN9FOpXPs2rJFSw5hLFLVmhWwWut2Luk1CVhb3BAQ'; // Your public anon key
+        const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL'; // e.g., 'https://xyzcompany.supabase.co'
+        const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY'; // Your public anon key
 
         // ===========================
         // TRANSLATIONS
@@ -1752,7 +1752,7 @@
 
         let supabase = null;
 
-        if (SUPABASE_URL !== 'https://kzyeanhtiwyrtiyqgawh.supabase.co' && SUPABASE_ANON_KEY !== 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt6eWVhbmh0aXd5cnRpeXFnYXdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExMjIxNDEsImV4cCI6MjA3NjY5ODE0MX0.Y-IN9FOpXPs2rJFSw5hLFLVmhWwWut2Luk1CVhb3BAQ') {
+        if (SUPABASE_URL !== 'YOUR_SUPABASE_PROJECT_URL' && SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY') {
             supabase = new SimpleSupabaseClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         }
 
@@ -1792,7 +1792,7 @@
             }
 
             try {
-                const result = await supabase.select('invite_codes', {
+                const result = await supabase.select('coachsearching_invite_codes', {
                     eq: { code: code, is_active: true }
                 });
 
@@ -1842,31 +1842,45 @@
             submitButton.disabled = true;
 
             try {
+                // Step 1: Validate invitation code
                 const isValidCode = await validateInviteCode(inviteCode);
                 if (!isValidCode) {
                     showError('form.error.invite');
                     return;
                 }
 
+                // Step 2: Create user in Supabase Auth
                 const randomPassword = Math.random().toString(36).slice(-12) + 'Aa1!';
                 const authResult = await supabase.signUp(email, randomPassword, {
-                    full_name: name
+                    full_name: name,
+                    email: email
                 });
 
+                console.log('Auth signup result:', authResult);
+
+                // Check for errors in auth response
                 if (authResult.error) {
                     throw new Error(authResult.error.message || 'Failed to create account');
                 }
 
+                // Get user ID from the response
+                const userId = authResult.user?.id || authResult.data?.user?.id || null;
+
+                if (!userId) {
+                    console.warn('No user ID returned from signup, proceeding without user_id link');
+                }
+
+                // Step 3: Insert coach data into database
                 const coachData = {
                     name: name,
                     email: email,
                     social_link: socialLink,
                     invite_code: inviteCode,
                     approved: false,
-                    user_id: authResult.data?.user?.id || null
+                    user_id: userId
                 };
 
-                await supabase.insert('coaches', coachData);
+                await supabase.insert('coachsearching_coaches', coachData);
 
                 showSuccess('form.success');
                 form.reset();
@@ -1874,7 +1888,9 @@
             } catch (error) {
                 console.error('Signup error:', error);
 
-                if (error.message.includes('already registered')) {
+                if (error.message.includes('already registered') || error.message.includes('already been registered')) {
+                    showError('form.error.duplicate');
+                } else if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
                     showError('form.error.duplicate');
                 } else {
                     showError('form.error.generic');

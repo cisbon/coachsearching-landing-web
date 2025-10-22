@@ -51,7 +51,7 @@ You can deploy this landing page to any static hosting service:
 
 ### Tables
 
-#### `invite_codes`
+#### `coachsearching_invite_codes`
 Stores valid invitation codes that coaches must use to sign up.
 
 | Column | Type | Description |
@@ -64,7 +64,7 @@ Stores valid invitation codes that coaches must use to sign up.
 | current_uses | INTEGER | How many times it has been used |
 | expires_at | TIMESTAMP | Optional expiration date |
 
-#### `coaches`
+#### `coachsearching_coaches`
 Stores coach registration data pending approval.
 
 | Column | Type | Description |
@@ -84,7 +84,7 @@ Stores coach registration data pending approval.
 ### Approving New Coaches
 
 1. Go to your Supabase dashboard
-2. Navigate to **Table Editor > coaches**
+2. Navigate to **Table Editor > coachsearching_coaches**
 3. Find coaches where `approved = false`
 4. Click on the row to edit
 5. Change `approved` to `true`
@@ -97,16 +97,16 @@ The `approved_at` timestamp will be set automatically by a database trigger.
 Run this SQL in the Supabase SQL Editor:
 
 ```sql
-INSERT INTO public.invite_codes (code, created_by, is_active, max_uses)
+INSERT INTO public.coachsearching_invite_codes (code, created_by, is_active, max_uses)
 VALUES ('YOUR-CODE-HERE', 'Trainer Name', true, 10);
 ```
 
 ### Viewing Pending Coaches
 
-Use the `pending_coaches` view:
+Use the `coachsearching_pending_coaches` view:
 
 ```sql
-SELECT * FROM public.pending_coaches;
+SELECT * FROM public.coachsearching_pending_coaches;
 ```
 
 ## Customization
@@ -134,7 +134,7 @@ To add or remove form fields:
 
 1. Add/remove the HTML input in the form
 2. Update the JavaScript form handler to capture the new field values
-3. Update the `coaches` table schema in Supabase if adding new fields
+3. Update the `coachsearching_coaches` table schema in Supabase if adding new fields
 
 ## Security Features
 
@@ -185,13 +185,14 @@ The landing page supports 5 languages with intelligent automatic detection:
 Set up Supabase Edge Functions to send email notifications when:
 - A new coach signs up (notify admins)
 - A coach is approved (notify the coach)
+- Trigger on UPDATE of `coachsearching_coaches` table when `approved = true`
 
 ### Admin Dashboard
 
 Build a custom admin panel to:
-- View pending coaches in a nice UI
+- View pending coaches from `coachsearching_pending_coaches` view
 - Approve/reject coaches with one click
-- Generate new invite codes
+- Generate new invite codes for `coachsearching_invite_codes`
 - View analytics (signups over time, etc.)
 
 ### Rate Limiting
