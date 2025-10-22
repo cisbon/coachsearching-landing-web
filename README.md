@@ -5,6 +5,7 @@ A modern, professional landing page for recruiting early-bird coaches to the Coa
 ## Features
 
 - **Modern, Responsive Design**: Professional UI optimized for both desktop and mobile devices
+- **Multi-Language Support**: Automatic language detection with 5 languages (English, German, French, Spanish, Italian)
 - **Supabase Integration**: Complete backend authentication and database setup
 - **Invite Code Validation**: Quality control through required invitation codes
 - **Manual Approval Process**: All signups are reviewed before granting access
@@ -142,6 +143,40 @@ To add or remove form fields:
 - **Self-Approval Prevention**: Users cannot approve their own accounts
 - **Input Validation**: Email format, URL format, and required fields are validated
 - **Invite Code Expiration**: Optional expiration dates for codes
+
+## Multi-Language Support
+
+The landing page supports 5 languages with intelligent automatic detection:
+
+### Supported Languages
+
+- **English (EN)** 🇬🇧
+- **German (DE)** 🇩🇪
+- **French (FR)** 🇫🇷
+- **Spanish (ES)** 🇪🇸
+- **Italian (IT)** 🇮🇹
+
+### How It Works
+
+1. **IP-Based Detection**: The page automatically detects the visitor's location using their IP address and sets the appropriate language
+2. **Browser Fallback**: If IP detection fails, it falls back to the browser's language settings
+3. **Manual Override**: Users can manually switch languages using the dropdown in the header
+4. **Persistent Preference**: The selected language is saved to localStorage for future visits
+
+### Language Detection Priority
+
+1. Saved preference (localStorage)
+2. IP-based geolocation (via ipapi.co)
+3. Browser language settings
+4. English (default fallback)
+
+### Country-to-Language Mapping
+
+- **German**: Germany, Austria, Switzerland
+- **French**: France, Belgium, Luxembourg
+- **Spanish**: Spain, Mexico, Argentina, Colombia, Chile (and other Spanish-speaking countries)
+- **Italian**: Italy, San Marino, Vatican City
+- **English**: UK, US, Canada, Australia, New Zealand, Ireland (and all other countries)
 
 ## Optional Enhancements
 
