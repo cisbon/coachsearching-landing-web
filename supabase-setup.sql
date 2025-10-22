@@ -131,9 +131,12 @@ ALTER TABLE public.coachsearching_invite_codes ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.coachsearching_coaches ENABLE ROW LEVEL SECURITY;
 
 -- Policy: Anyone can check if an invite code is valid (read-only)
+-- Explicitly grant to both anon (unauthenticated) and authenticated users
+DROP POLICY IF EXISTS "Public read for active invite codes" ON public.coachsearching_invite_codes;
 CREATE POLICY "Public read for active invite codes"
     ON public.coachsearching_invite_codes
     FOR SELECT
+    TO anon, authenticated
     USING (
         is_active = true
         AND (expires_at IS NULL OR expires_at > NOW())
@@ -142,23 +145,30 @@ CREATE POLICY "Public read for active invite codes"
 
 -- Policy: Anyone can insert a new coach record
 -- This allows the signup form to work without authentication
+-- Explicitly grant to both anon (unauthenticated) and authenticated users
+DROP POLICY IF EXISTS "Public insert for coaches" ON public.coachsearching_coaches;
 CREATE POLICY "Public insert for coaches"
     ON public.coachsearching_coaches
     FOR INSERT
+    TO anon, authenticated
     WITH CHECK (true);
 
 -- Policy: Coaches can only view their own record (once authenticated)
+DROP POLICY IF EXISTS "Coaches can view own record" ON public.coachsearching_coaches;
 CREATE POLICY "Coaches can view own record"
     ON public.coachsearching_coaches
     FOR SELECT
+    TO authenticated
     USING (auth.uid() = user_id);
 
 -- Policy: Only service role can update coach records
 -- This prevents users from self-approving
 -- (Admins will need to use the Supabase dashboard or a custom admin panel)
+DROP POLICY IF EXISTS "Only admins can update coaches" ON public.coachsearching_coaches;
 CREATE POLICY "Only admins can update coaches"
     ON public.coachsearching_coaches
     FOR UPDATE
+    TO anon, authenticated
     USING (false); -- This means regular users cannot update; use service_role key for admin updates
 
 -- =====================================================

@@ -2010,6 +2010,11 @@
                     showError('form.error.duplicate');
                 } else if (errorMsg.includes('duplicate key') || errorMsg.includes('unique constraint') || errorMsg.includes('already exists')) {
                     showError('form.error.duplicate');
+                } else if (errorMsg.includes('row-level security') || errorMsg.includes('rls') || errorMsg.includes('policy')) {
+                    // RLS error - this means the database policies need to be updated
+                    console.error('RLS Policy Error:', error.message);
+                    showError('form.error.generic');
+                    alert('Database configuration error: The Row Level Security policies need to be updated.\n\nPlease re-run the supabase-setup.sql file in your Supabase SQL Editor.\n\nTechnical details: ' + error.message);
                 } else if (errorMsg.includes('email')) {
                     showError('form.error.email');
                 } else if (errorMsg.includes('invite') || errorMsg.includes('code')) {
@@ -2018,9 +2023,6 @@
                     // Show the actual error message in development
                     console.error('Showing generic error for:', error.message);
                     showError('form.error.generic');
-
-                    // Also display the actual error in the console for debugging
-                    alert('Debug Info: ' + error.message + '\n\nCheck browser console for more details.');
                 }
 
             } finally {
