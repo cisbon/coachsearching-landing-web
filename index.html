@@ -751,6 +751,136 @@
             font-size: 0.95rem;
         }
 
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--bg-white);
+            text-decoration: underline;
+        }
+
+        .footer-separator {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* ===========================
+           Legal Pages
+        =========================== */
+        .legal-page {
+            background-color: var(--bg-light);
+            min-height: 100vh;
+        }
+
+        .legal-header {
+            background-color: var(--bg-white);
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 98, 102, 0.1);
+            margin-bottom: 40px;
+        }
+
+        .legal-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-to-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            color: var(--primary-hover);
+        }
+
+        .back-to-home span:first-child {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .legal-brand {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .legal-content {
+            padding: 40px 0 80px 0;
+        }
+
+        .legal-content h1 {
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .legal-updated {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .legal-section {
+            margin-bottom: 40px;
+        }
+
+        .legal-section h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .legal-section p {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .legal-section ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        .legal-section li {
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .legal-section a {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .legal-section a:hover {
+            color: var(--primary-hover);
+        }
+
         /* ===========================
            Responsive Design
         =========================== */
@@ -1247,9 +1377,291 @@
     =========================== -->
     <footer class="footer">
         <div class="container">
-            <p data-i18n="footer.copyright">&copy; 2025 CoachSearching.com - All rights reserved.</p>
+            <div class="footer-content">
+                <p data-i18n="footer.copyright">&copy; 2025 CoachSearching.com - All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#" class="footer-link" data-page="privacy" data-i18n="footer.privacy">Privacy Policy</a>
+                    <span class="footer-separator">|</span>
+                    <a href="#" class="footer-link" data-page="terms" data-i18n="footer.terms">Terms of Service</a>
+                    <span class="footer-separator">|</span>
+                    <a href="#" class="footer-link" data-page="imprint" data-i18n="footer.imprint">Imprint</a>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- ===========================
+         LEGAL PAGES (Hidden by default)
+    =========================== -->
+    <div id="legalPage" class="legal-page" style="display: none;">
+        <!-- Legal Page Header -->
+        <div class="legal-header">
+            <div class="container">
+                <a href="#" class="back-to-home" id="backToHome">
+                    <span>←</span> <span data-i18n="legal.back">Back to Home</span>
+                </a>
+                <h1 class="legal-brand">CoachSearching</h1>
+            </div>
+        </div>
+
+        <!-- Privacy Policy -->
+        <div id="privacyPage" class="legal-content" style="display: none;">
+            <div class="container">
+                <h1 data-i18n="legal.privacy.title">Privacy Policy</h1>
+                <p class="legal-updated" data-i18n="legal.updated">Last updated: January 2025</p>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.intro.title">1. Introduction</h2>
+                    <p data-i18n="legal.privacy.intro.text">
+                        CoachSearching ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.collection.title">2. Information We Collect</h2>
+                    <p data-i18n="legal.privacy.collection.text">
+                        We collect information that you provide directly to us, including:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.privacy.collection.item1">Name and contact information (email address)</li>
+                        <li data-i18n="legal.privacy.collection.item2">Professional information (coaching credentials, specialties, experience)</li>
+                        <li data-i18n="legal.privacy.collection.item3">Social media profiles for verification purposes</li>
+                        <li data-i18n="legal.privacy.collection.item4">Communication preferences and correspondence with us</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.usage.title">3. How We Use Your Information</h2>
+                    <p data-i18n="legal.privacy.usage.text">
+                        We use the information we collect to:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.privacy.usage.item1">Create and manage your coach profile</li>
+                        <li data-i18n="legal.privacy.usage.item2">Connect you with potential clients</li>
+                        <li data-i18n="legal.privacy.usage.item3">Verify your coaching credentials and professional background</li>
+                        <li data-i18n="legal.privacy.usage.item4">Send you important updates about our platform</li>
+                        <li data-i18n="legal.privacy.usage.item5">Improve our services and user experience</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.sharing.title">4. Information Sharing</h2>
+                    <p data-i18n="legal.privacy.sharing.text">
+                        We do not sell your personal information. We may share your information only in the following circumstances:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.privacy.sharing.item1">With your explicit consent</li>
+                        <li data-i18n="legal.privacy.sharing.item2">To comply with legal obligations</li>
+                        <li data-i18n="legal.privacy.sharing.item3">To protect our rights and prevent fraud</li>
+                        <li data-i18n="legal.privacy.sharing.item4">With service providers who assist in operating our platform (under strict confidentiality agreements)</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.security.title">5. Data Security</h2>
+                    <p data-i18n="legal.privacy.security.text">
+                        We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.rights.title">6. Your Rights</h2>
+                    <p data-i18n="legal.privacy.rights.text">
+                        You have the right to:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.privacy.rights.item1">Access and receive a copy of your personal data</li>
+                        <li data-i18n="legal.privacy.rights.item2">Correct inaccurate or incomplete information</li>
+                        <li data-i18n="legal.privacy.rights.item3">Request deletion of your personal information</li>
+                        <li data-i18n="legal.privacy.rights.item4">Object to or restrict certain processing of your data</li>
+                        <li data-i18n="legal.privacy.rights.item5">Withdraw consent at any time</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.privacy.contact.title">7. Contact Us</h2>
+                    <p data-i18n="legal.privacy.contact.text">
+                        If you have questions about this Privacy Policy, please contact us at: privacy@coachsearching.com
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Terms of Service -->
+        <div id="termsPage" class="legal-content" style="display: none;">
+            <div class="container">
+                <h1 data-i18n="legal.terms.title">Terms of Service</h1>
+                <p class="legal-updated" data-i18n="legal.updated">Last updated: January 2025</p>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.acceptance.title">1. Acceptance of Terms</h2>
+                    <p data-i18n="legal.terms.acceptance.text">
+                        By accessing and using CoachSearching, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our platform.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.earlybird.title">2. Early-Bird Program</h2>
+                    <p data-i18n="legal.terms.earlybird.text">
+                        The Early-Bird Program offers lifetime free access to coaches who register during the program period. This includes:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.terms.earlybird.item1">Permanent profile listing on the platform at no cost</li>
+                        <li data-i18n="legal.terms.earlybird.item2">Access to pro-bono coaching opportunities</li>
+                        <li data-i18n="legal.terms.earlybird.item3">Visibility to clients seeking coaching services</li>
+                    </ul>
+                    <p data-i18n="legal.terms.earlybird.note">
+                        Note: Lifetime free access applies to standard profile listings. Premium features or advertising may be subject to additional fees in the future.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.eligibility.title">3. Eligibility and Registration</h2>
+                    <p data-i18n="legal.terms.eligibility.text">
+                        To register as a coach, you must:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.terms.eligibility.item1">Be at least 18 years of age</li>
+                        <li data-i18n="legal.terms.eligibility.item2">Possess valid coaching credentials or be in an accredited coach training program</li>
+                        <li data-i18n="legal.terms.eligibility.item3">Provide accurate and truthful information</li>
+                        <li data-i18n="legal.terms.eligibility.item4">Have a valid invitation code from a certified coach trainer</li>
+                        <li data-i18n="legal.terms.eligibility.item5">Maintain an active and verifiable social media presence</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.conduct.title">4. Coach Conduct and Responsibilities</h2>
+                    <p data-i18n="legal.terms.conduct.text">
+                        As a coach on our platform, you agree to:
+                    </p>
+                    <ul>
+                        <li data-i18n="legal.terms.conduct.item1">Maintain professional standards and ethical coaching practices</li>
+                        <li data-i18n="legal.terms.conduct.item2">Respect client confidentiality</li>
+                        <li data-i18n="legal.terms.conduct.item3">Provide accurate information about your credentials and experience</li>
+                        <li data-i18n="legal.terms.conduct.item4">Comply with all applicable laws and regulations</li>
+                        <li data-i18n="legal.terms.conduct.item5">Not engage in any fraudulent, abusive, or harmful behavior</li>
+                    </ul>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.approval.title">5. Profile Approval and Termination</h2>
+                    <p data-i18n="legal.terms.approval.text">
+                        CoachSearching reserves the right to approve or reject any coach application. We may suspend or terminate accounts that violate these terms or engage in conduct harmful to our community.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.liability.title">6. Limitation of Liability</h2>
+                    <p data-i18n="legal.terms.liability.text">
+                        CoachSearching is a platform connecting coaches and clients. We are not responsible for the quality of coaching services, disputes between coaches and clients, or any damages arising from coaching relationships formed through our platform.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.changes.title">7. Changes to Terms</h2>
+                    <p data-i18n="legal.terms.changes.text">
+                        We reserve the right to modify these Terms of Service at any time. Continued use of the platform after changes constitutes acceptance of the modified terms.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.terms.contact.title">8. Contact Us</h2>
+                    <p data-i18n="legal.terms.contact.text">
+                        For questions about these Terms of Service, contact us at: legal@coachsearching.com
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Imprint -->
+        <div id="imprintPage" class="legal-content" style="display: none;">
+            <div class="container">
+                <h1 data-i18n="legal.imprint.title">Imprint</h1>
+                <p class="legal-updated" data-i18n="legal.updated">Last updated: January 2025</p>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.info.title">Information according to § 5 TMG</h2>
+                    <p data-i18n="legal.imprint.company">
+                        CoachSearching<br>
+                        [Your Company Name]<br>
+                        [Your Street Address]<br>
+                        [Your City, Postal Code]<br>
+                        [Your Country]
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.represented.title">Represented by</h2>
+                    <p data-i18n="legal.imprint.represented.text">
+                        [Managing Director / CEO Name]
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.contact.title">Contact</h2>
+                    <p>
+                        <span data-i18n="legal.imprint.contact.phone">Phone:</span> [Your Phone Number]<br>
+                        <span data-i18n="legal.imprint.contact.email">Email:</span> info@coachsearching.com
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.register.title">Register Entry</h2>
+                    <p data-i18n="legal.imprint.register.text">
+                        <span data-i18n="legal.imprint.register.court">Registration court:</span> [Court Name]<br>
+                        <span data-i18n="legal.imprint.register.number">Registration number:</span> [Registration Number]
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.vat.title">VAT ID</h2>
+                    <p data-i18n="legal.imprint.vat.text">
+                        <span data-i18n="legal.imprint.vat.number">VAT identification number according to §27a UStG:</span><br>
+                        [Your VAT Number]
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.dispute.title">EU Dispute Resolution</h2>
+                    <p data-i18n="legal.imprint.dispute.text">
+                        The European Commission provides a platform for online dispute resolution (ODR):
+                        <a href="https://ec.europa.eu/consumers/odr" target="_blank">https://ec.europa.eu/consumers/odr</a>
+                    </p>
+                    <p data-i18n="legal.imprint.dispute.email">
+                        Our email address can be found above in the imprint.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.consumer.title">Consumer Dispute Resolution</h2>
+                    <p data-i18n="legal.imprint.consumer.text">
+                        We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.liability.title">Liability for Contents</h2>
+                    <p data-i18n="legal.imprint.liability.text">
+                        As a service provider, we are responsible for our own content on these pages in accordance with general legislation. However, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.
+                    </p>
+                </section>
+
+                <section class="legal-section">
+                    <h2 data-i18n="legal.imprint.links.title">Liability for Links</h2>
+                    <p data-i18n="legal.imprint.links.text">
+                        Our website contains links to external websites over which we have no control. Therefore, we cannot accept any liability for this external content. The respective provider or operator of the pages is always responsible for the content of the linked pages.
+                    </p>
+                </section>
+            </div>
+        </div>
+
+        <!-- Legal Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p data-i18n="footer.copyright">&copy; 2025 CoachSearching.com - All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
 
     <!-- ===========================
          JAVASCRIPT
@@ -1327,7 +1739,100 @@
                 'form.error.invite': 'Invalid invitation code. Please check your code and try again.',
                 'form.error.generic': 'An error occurred during signup. Please try again.',
                 'form.error.duplicate': 'This email is already registered. Please use a different email.',
-                'form.success': '🎉 Success! Your application has been submitted. You will receive an email once approved. Thank you for joining CoachSearching!'
+                'form.success': '🎉 Success! Your application has been submitted. You will receive an email once approved. Thank you for joining CoachSearching!',
+                'footer.privacy': 'Privacy Policy',
+                'footer.terms': 'Terms of Service',
+                'footer.imprint': 'Imprint',
+                'legal.back': 'Back to Home',
+                'legal.updated': 'Last updated: January 2025',
+                'legal.privacy.title': 'Privacy Policy',
+                'legal.privacy.intro.title': '1. Introduction',
+                'legal.privacy.intro.text': 'CoachSearching ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.',
+                'legal.privacy.collection.title': '2. Information We Collect',
+                'legal.privacy.collection.text': 'We collect information that you provide directly to us, including:',
+                'legal.privacy.collection.item1': 'Name and contact information (email address)',
+                'legal.privacy.collection.item2': 'Professional information (coaching credentials, specialties, experience)',
+                'legal.privacy.collection.item3': 'Social media profiles for verification purposes',
+                'legal.privacy.collection.item4': 'Communication preferences and correspondence with us',
+                'legal.privacy.usage.title': '3. How We Use Your Information',
+                'legal.privacy.usage.text': 'We use the information we collect to:',
+                'legal.privacy.usage.item1': 'Create and manage your coach profile',
+                'legal.privacy.usage.item2': 'Connect you with potential clients',
+                'legal.privacy.usage.item3': 'Verify your coaching credentials and professional background',
+                'legal.privacy.usage.item4': 'Send you important updates about our platform',
+                'legal.privacy.usage.item5': 'Improve our services and user experience',
+                'legal.privacy.sharing.title': '4. Information Sharing',
+                'legal.privacy.sharing.text': 'We do not sell your personal information. We may share your information only in the following circumstances:',
+                'legal.privacy.sharing.item1': 'With your explicit consent',
+                'legal.privacy.sharing.item2': 'To comply with legal obligations',
+                'legal.privacy.sharing.item3': 'To protect our rights and prevent fraud',
+                'legal.privacy.sharing.item4': 'With service providers who assist in operating our platform (under strict confidentiality agreements)',
+                'legal.privacy.security.title': '5. Data Security',
+                'legal.privacy.security.text': 'We implement appropriate technical and organizational measures to protect your personal information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.',
+                'legal.privacy.rights.title': '6. Your Rights',
+                'legal.privacy.rights.text': 'You have the right to:',
+                'legal.privacy.rights.item1': 'Access and receive a copy of your personal data',
+                'legal.privacy.rights.item2': 'Correct inaccurate or incomplete information',
+                'legal.privacy.rights.item3': 'Request deletion of your personal information',
+                'legal.privacy.rights.item4': 'Object to or restrict certain processing of your data',
+                'legal.privacy.rights.item5': 'Withdraw consent at any time',
+                'legal.privacy.contact.title': '7. Contact Us',
+                'legal.privacy.contact.text': 'If you have questions about this Privacy Policy, please contact us at: privacy@coachsearching.com',
+                'legal.terms.title': 'Terms of Service',
+                'legal.terms.acceptance.title': '1. Acceptance of Terms',
+                'legal.terms.acceptance.text': 'By accessing and using CoachSearching, you accept and agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our platform.',
+                'legal.terms.earlybird.title': '2. Early-Bird Program',
+                'legal.terms.earlybird.text': 'The Early-Bird Program offers lifetime free access to coaches who register during the program period. This includes:',
+                'legal.terms.earlybird.item1': 'Permanent profile listing on the platform at no cost',
+                'legal.terms.earlybird.item2': 'Access to pro-bono coaching opportunities',
+                'legal.terms.earlybird.item3': 'Visibility to clients seeking coaching services',
+                'legal.terms.earlybird.note': 'Note: Lifetime free access applies to standard profile listings. Premium features or advertising may be subject to additional fees in the future.',
+                'legal.terms.eligibility.title': '3. Eligibility and Registration',
+                'legal.terms.eligibility.text': 'To register as a coach, you must:',
+                'legal.terms.eligibility.item1': 'Be at least 18 years of age',
+                'legal.terms.eligibility.item2': 'Possess valid coaching credentials or be in an accredited coach training program',
+                'legal.terms.eligibility.item3': 'Provide accurate and truthful information',
+                'legal.terms.eligibility.item4': 'Have a valid invitation code from a certified coach trainer',
+                'legal.terms.eligibility.item5': 'Maintain an active and verifiable social media presence',
+                'legal.terms.conduct.title': '4. Coach Conduct and Responsibilities',
+                'legal.terms.conduct.text': 'As a coach on our platform, you agree to:',
+                'legal.terms.conduct.item1': 'Maintain professional standards and ethical coaching practices',
+                'legal.terms.conduct.item2': 'Respect client confidentiality',
+                'legal.terms.conduct.item3': 'Provide accurate information about your credentials and experience',
+                'legal.terms.conduct.item4': 'Comply with all applicable laws and regulations',
+                'legal.terms.conduct.item5': 'Not engage in any fraudulent, abusive, or harmful behavior',
+                'legal.terms.approval.title': '5. Profile Approval and Termination',
+                'legal.terms.approval.text': 'CoachSearching reserves the right to approve or reject any coach application. We may suspend or terminate accounts that violate these terms or engage in conduct harmful to our community.',
+                'legal.terms.liability.title': '6. Limitation of Liability',
+                'legal.terms.liability.text': 'CoachSearching is a platform connecting coaches and clients. We are not responsible for the quality of coaching services, disputes between coaches and clients, or any damages arising from coaching relationships formed through our platform.',
+                'legal.terms.changes.title': '7. Changes to Terms',
+                'legal.terms.changes.text': 'We reserve the right to modify these Terms of Service at any time. Continued use of the platform after changes constitutes acceptance of the modified terms.',
+                'legal.terms.contact.title': '8. Contact Us',
+                'legal.terms.contact.text': 'For questions about these Terms of Service, contact us at: legal@coachsearching.com',
+                'legal.imprint.title': 'Imprint',
+                'legal.imprint.info.title': 'Information according to § 5 TMG',
+                'legal.imprint.company': 'CoachSearching\n[Your Company Name]\n[Your Street Address]\n[Your City, Postal Code]\n[Your Country]',
+                'legal.imprint.represented.title': 'Represented by',
+                'legal.imprint.represented.text': '[Managing Director / CEO Name]',
+                'legal.imprint.contact.title': 'Contact',
+                'legal.imprint.contact.phone': 'Phone:',
+                'legal.imprint.contact.email': 'Email:',
+                'legal.imprint.register.title': 'Register Entry',
+                'legal.imprint.register.text': '',
+                'legal.imprint.register.court': 'Registration court:',
+                'legal.imprint.register.number': 'Registration number:',
+                'legal.imprint.vat.title': 'VAT ID',
+                'legal.imprint.vat.text': '',
+                'legal.imprint.vat.number': 'VAT identification number according to §27a UStG:',
+                'legal.imprint.dispute.title': 'EU Dispute Resolution',
+                'legal.imprint.dispute.text': 'The European Commission provides a platform for online dispute resolution (ODR): https://ec.europa.eu/consumers/odr',
+                'legal.imprint.dispute.email': 'Our email address can be found above in the imprint.',
+                'legal.imprint.consumer.title': 'Consumer Dispute Resolution',
+                'legal.imprint.consumer.text': 'We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.',
+                'legal.imprint.liability.title': 'Liability for Contents',
+                'legal.imprint.liability.text': 'As a service provider, we are responsible for our own content on these pages in accordance with general legislation. However, we are not obligated to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity.',
+                'legal.imprint.links.title': 'Liability for Links',
+                'legal.imprint.links.text': 'Our website contains links to external websites over which we have no control. Therefore, we cannot accept any liability for this external content. The respective provider or operator of the pages is always responsible for the content of the linked pages.'
             },
             de: {
                 'header.cta': 'Early-Bird-Programm Beitreten',
@@ -1387,7 +1892,100 @@
                 'form.error.invite': 'Ungültiger Einladungscode.',
                 'form.error.generic': 'Ein Fehler ist aufgetreten.',
                 'form.error.duplicate': 'Diese E-Mail ist bereits registriert.',
-                'form.success': '🎉 Erfolg! Ihr Antrag wurde eingereicht. Sie erhalten eine E-Mail nach der Genehmigung!'
+                'form.success': '🎉 Erfolg! Ihr Antrag wurde eingereicht. Sie erhalten eine E-Mail nach der Genehmigung!',
+                'footer.privacy': 'Datenschutzerklärung',
+                'footer.terms': 'Nutzungsbedingungen',
+                'footer.imprint': 'Impressum',
+                'legal.back': 'Zurück zur Startseite',
+                'legal.updated': 'Zuletzt aktualisiert: Januar 2025',
+                'legal.privacy.title': 'Datenschutzerklärung',
+                'legal.privacy.intro.title': '1. Einleitung',
+                'legal.privacy.intro.text': 'CoachSearching ("wir", "unser" oder "uns") verpflichtet sich zum Schutz Ihrer Privatsphäre. Diese Datenschutzerklärung erläutert, wie wir Ihre Informationen sammeln, verwenden, offenlegen und schützen, wenn Sie unsere Plattform nutzen.',
+                'legal.privacy.collection.title': '2. Informationen, die wir sammeln',
+                'legal.privacy.collection.text': 'Wir sammeln Informationen, die Sie uns direkt zur Verfügung stellen, einschließlich:',
+                'legal.privacy.collection.item1': 'Name und Kontaktinformationen (E-Mail-Adresse)',
+                'legal.privacy.collection.item2': 'Berufliche Informationen (Coaching-Qualifikationen, Fachgebiete, Erfahrung)',
+                'legal.privacy.collection.item3': 'Social-Media-Profile zu Verifizierungszwecken',
+                'legal.privacy.collection.item4': 'Kommunikationspräferenzen und Korrespondenz mit uns',
+                'legal.privacy.usage.title': '3. Wie wir Ihre Informationen verwenden',
+                'legal.privacy.usage.text': 'Wir verwenden die gesammelten Informationen, um:',
+                'legal.privacy.usage.item1': 'Ihr Coach-Profil zu erstellen und zu verwalten',
+                'legal.privacy.usage.item2': 'Sie mit potenziellen Klienten zu verbinden',
+                'legal.privacy.usage.item3': 'Ihre Coaching-Qualifikationen und beruflichen Hintergrund zu überprüfen',
+                'legal.privacy.usage.item4': 'Ihnen wichtige Updates über unsere Plattform zu senden',
+                'legal.privacy.usage.item5': 'Unsere Dienstleistungen und Benutzererfahrung zu verbessern',
+                'legal.privacy.sharing.title': '4. Weitergabe von Informationen',
+                'legal.privacy.sharing.text': 'Wir verkaufen Ihre persönlichen Informationen nicht. Wir können Ihre Informationen nur unter folgenden Umständen weitergeben:',
+                'legal.privacy.sharing.item1': 'Mit Ihrer ausdrücklichen Zustimmung',
+                'legal.privacy.sharing.item2': 'Zur Erfüllung gesetzlicher Verpflichtungen',
+                'legal.privacy.sharing.item3': 'Zum Schutz unserer Rechte und zur Betrugsprävention',
+                'legal.privacy.sharing.item4': 'Mit Dienstleistern, die beim Betrieb unserer Plattform helfen (unter strengen Vertraulichkeitsvereinbarungen)',
+                'legal.privacy.security.title': '5. Datensicherheit',
+                'legal.privacy.security.text': 'Wir implementieren angemessene technische und organisatorische Maßnahmen zum Schutz Ihrer persönlichen Informationen. Keine Übertragungsmethode über das Internet ist jedoch zu 100% sicher, und wir können keine absolute Sicherheit garantieren.',
+                'legal.privacy.rights.title': '6. Ihre Rechte',
+                'legal.privacy.rights.text': 'Sie haben das Recht:',
+                'legal.privacy.rights.item1': 'Auf Zugang zu Ihren personenbezogenen Daten und Erhalt einer Kopie',
+                'legal.privacy.rights.item2': 'Ungenaue oder unvollständige Informationen zu korrigieren',
+                'legal.privacy.rights.item3': 'Die Löschung Ihrer persönlichen Informationen zu beantragen',
+                'legal.privacy.rights.item4': 'Gegen bestimmte Verarbeitungen Ihrer Daten Widerspruch einzulegen oder diese einzuschränken',
+                'legal.privacy.rights.item5': 'Die Einwilligung jederzeit zu widerrufen',
+                'legal.privacy.contact.title': '7. Kontakt',
+                'legal.privacy.contact.text': 'Bei Fragen zu dieser Datenschutzerklärung kontaktieren Sie uns bitte unter: privacy@coachsearching.com',
+                'legal.terms.title': 'Nutzungsbedingungen',
+                'legal.terms.acceptance.title': '1. Annahme der Bedingungen',
+                'legal.terms.acceptance.text': 'Durch den Zugriff auf und die Nutzung von CoachSearching akzeptieren Sie diese Nutzungsbedingungen und erklären sich damit einverstanden, an sie gebunden zu sein. Wenn Sie mit diesen Bedingungen nicht einverstanden sind, nutzen Sie bitte unsere Plattform nicht.',
+                'legal.terms.earlybird.title': '2. Early-Bird-Programm',
+                'legal.terms.earlybird.text': 'Das Early-Bird-Programm bietet Coaches, die sich während des Programmzeitraums registrieren, lebenslangen kostenlosen Zugang. Dies beinhaltet:',
+                'legal.terms.earlybird.item1': 'Permanente Profil-Listung auf der Plattform ohne Kosten',
+                'legal.terms.earlybird.item2': 'Zugang zu Pro-Bono-Coaching-Möglichkeiten',
+                'legal.terms.earlybird.item3': 'Sichtbarkeit für Klienten, die Coaching-Dienstleistungen suchen',
+                'legal.terms.earlybird.note': 'Hinweis: Der lebenslange kostenlose Zugang gilt für Standard-Profil-Listungen. Premium-Funktionen oder Werbung können in Zukunft zusätzlichen Gebühren unterliegen.',
+                'legal.terms.eligibility.title': '3. Berechtigung und Registrierung',
+                'legal.terms.eligibility.text': 'Um sich als Coach zu registrieren, müssen Sie:',
+                'legal.terms.eligibility.item1': 'Mindestens 18 Jahre alt sein',
+                'legal.terms.eligibility.item2': 'Über gültige Coaching-Qualifikationen verfügen oder an einem akkreditierten Coach-Ausbildungsprogramm teilnehmen',
+                'legal.terms.eligibility.item3': 'Genaue und wahrheitsgemäße Informationen bereitstellen',
+                'legal.terms.eligibility.item4': 'Einen gültigen Einladungscode von einem zertifizierten Coach-Trainer haben',
+                'legal.terms.eligibility.item5': 'Eine aktive und überprüfbare Social-Media-Präsenz aufrechterhalten',
+                'legal.terms.conduct.title': '4. Coach-Verhalten und Verantwortlichkeiten',
+                'legal.terms.conduct.text': 'Als Coach auf unserer Plattform verpflichten Sie sich:',
+                'legal.terms.conduct.item1': 'Professionelle Standards und ethische Coaching-Praktiken einzuhalten',
+                'legal.terms.conduct.item2': 'Die Vertraulichkeit der Klienten zu respektieren',
+                'legal.terms.conduct.item3': 'Genaue Informationen über Ihre Qualifikationen und Erfahrung bereitzustellen',
+                'legal.terms.conduct.item4': 'Alle anwendbaren Gesetze und Vorschriften einzuhalten',
+                'legal.terms.conduct.item5': 'Sich nicht an betrügerischem, missbräuchlichem oder schädlichem Verhalten zu beteiligen',
+                'legal.terms.approval.title': '5. Profilgenehmigung und Kündigung',
+                'legal.terms.approval.text': 'CoachSearching behält sich das Recht vor, jede Coach-Bewerbung zu genehmigen oder abzulehnen. Wir können Konten aussetzen oder kündigen, die gegen diese Bedingungen verstoßen oder sich an Verhalten beteiligen, das unserer Gemeinschaft schadet.',
+                'legal.terms.liability.title': '6. Haftungsbeschränkung',
+                'legal.terms.liability.text': 'CoachSearching ist eine Plattform, die Coaches und Klienten verbindet. Wir sind nicht verantwortlich für die Qualität der Coaching-Dienstleistungen, Streitigkeiten zwischen Coaches und Klienten oder Schäden, die aus Coaching-Beziehungen entstehen, die über unsere Plattform gebildet wurden.',
+                'legal.terms.changes.title': '7. Änderungen der Bedingungen',
+                'legal.terms.changes.text': 'Wir behalten uns das Recht vor, diese Nutzungsbedingungen jederzeit zu ändern. Die fortgesetzte Nutzung der Plattform nach Änderungen stellt die Annahme der geänderten Bedingungen dar.',
+                'legal.terms.contact.title': '8. Kontakt',
+                'legal.terms.contact.text': 'Bei Fragen zu diesen Nutzungsbedingungen kontaktieren Sie uns unter: legal@coachsearching.com',
+                'legal.imprint.title': 'Impressum',
+                'legal.imprint.info.title': 'Angaben gemäß § 5 TMG',
+                'legal.imprint.company': 'CoachSearching\n[Your Company Name]\n[Your Street Address]\n[Your City, Postal Code]\n[Your Country]',
+                'legal.imprint.represented.title': 'Vertreten durch',
+                'legal.imprint.represented.text': '[Managing Director / CEO Name]',
+                'legal.imprint.contact.title': 'Kontakt',
+                'legal.imprint.contact.phone': 'Telefon:',
+                'legal.imprint.contact.email': 'E-Mail:',
+                'legal.imprint.register.title': 'Registereintrag',
+                'legal.imprint.register.text': '',
+                'legal.imprint.register.court': 'Registergericht:',
+                'legal.imprint.register.number': 'Registernummer:',
+                'legal.imprint.vat.title': 'Umsatzsteuer-ID',
+                'legal.imprint.vat.text': '',
+                'legal.imprint.vat.number': 'Umsatzsteuer-Identifikationsnummer gemäß §27a UStG:',
+                'legal.imprint.dispute.title': 'EU-Streitschlichtung',
+                'legal.imprint.dispute.text': 'Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: https://ec.europa.eu/consumers/odr',
+                'legal.imprint.dispute.email': 'Unsere E-Mail-Adresse finden Sie oben im Impressum.',
+                'legal.imprint.consumer.title': 'Verbraucherstreitbeilegung',
+                'legal.imprint.consumer.text': 'Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.',
+                'legal.imprint.liability.title': 'Haftung für Inhalte',
+                'legal.imprint.liability.text': 'Als Diensteanbieter sind wir gemäß den allgemeinen Gesetzen für eigene Inhalte auf diesen Seiten verantwortlich. Wir sind jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.',
+                'legal.imprint.links.title': 'Haftung für Links',
+                'legal.imprint.links.text': 'Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.'
             },
             fr: {
                 'header.cta': 'Rejoindre le Programme',
@@ -1447,7 +2045,100 @@
                 'form.error.invite': 'Code d\'invitation invalide.',
                 'form.error.generic': 'Une erreur est survenue.',
                 'form.error.duplicate': 'Cet e-mail est déjà enregistré.',
-                'form.success': '🎉 Succès! Votre candidature a été soumise!'
+                'form.success': '🎉 Succès! Votre candidature a été soumise!',
+                'footer.privacy': 'Politique de Confidentialité',
+                'footer.terms': 'Conditions d\'utilisation',
+                'footer.imprint': 'Mentions Légales',
+                'legal.back': 'Retour à l\'Accueil',
+                'legal.updated': 'Dernière mise à jour : Janvier 2025',
+                'legal.privacy.title': 'Politique de Confidentialité',
+                'legal.privacy.intro.title': '1. Introduction',
+                'legal.privacy.intro.text': 'CoachSearching (« nous », « notre » ou « nos ») s\'engage à protéger votre vie privée. Cette Politique de Confidentialité explique comment nous collectons, utilisons, divulguons et protégeons vos informations lorsque vous utilisez notre plateforme.',
+                'legal.privacy.collection.title': '2. Informations que nous collectons',
+                'legal.privacy.collection.text': 'Nous collectons les informations que vous nous fournissez directement, notamment :',
+                'legal.privacy.collection.item1': 'Nom et coordonnées (adresse e-mail)',
+                'legal.privacy.collection.item2': 'Informations professionnelles (qualifications de coaching, spécialités, expérience)',
+                'legal.privacy.collection.item3': 'Profils de médias sociaux à des fins de vérification',
+                'legal.privacy.collection.item4': 'Préférences de communication et correspondance avec nous',
+                'legal.privacy.usage.title': '3. Comment nous utilisons vos informations',
+                'legal.privacy.usage.text': 'Nous utilisons les informations collectées pour :',
+                'legal.privacy.usage.item1': 'Créer et gérer votre profil de coach',
+                'legal.privacy.usage.item2': 'Vous connecter avec des clients potentiels',
+                'legal.privacy.usage.item3': 'Vérifier vos qualifications de coaching et votre parcours professionnel',
+                'legal.privacy.usage.item4': 'Vous envoyer des mises à jour importantes concernant notre plateforme',
+                'legal.privacy.usage.item5': 'Améliorer nos services et l\'expérience utilisateur',
+                'legal.privacy.sharing.title': '4. Partage d\'informations',
+                'legal.privacy.sharing.text': 'Nous ne vendons pas vos informations personnelles. Nous ne pouvons partager vos informations que dans les circonstances suivantes :',
+                'legal.privacy.sharing.item1': 'Avec votre consentement explicite',
+                'legal.privacy.sharing.item2': 'Pour respecter les obligations légales',
+                'legal.privacy.sharing.item3': 'Pour protéger nos droits et prévenir la fraude',
+                'legal.privacy.sharing.item4': 'Avec des prestataires de services qui nous aident à exploiter notre plateforme (sous des accords de confidentialité stricts)',
+                'legal.privacy.security.title': '5. Sécurité des données',
+                'legal.privacy.security.text': 'Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos informations personnelles. Cependant, aucune méthode de transmission sur Internet n\'est sécurisée à 100%, et nous ne pouvons garantir une sécurité absolue.',
+                'legal.privacy.rights.title': '6. Vos droits',
+                'legal.privacy.rights.text': 'Vous avez le droit de :',
+                'legal.privacy.rights.item1': 'Accéder et recevoir une copie de vos données personnelles',
+                'legal.privacy.rights.item2': 'Corriger les informations inexactes ou incomplètes',
+                'legal.privacy.rights.item3': 'Demander la suppression de vos informations personnelles',
+                'legal.privacy.rights.item4': 'Vous opposer ou restreindre certains traitements de vos données',
+                'legal.privacy.rights.item5': 'Retirer votre consentement à tout moment',
+                'legal.privacy.contact.title': '7. Nous contacter',
+                'legal.privacy.contact.text': 'Si vous avez des questions concernant cette Politique de Confidentialité, veuillez nous contacter à : privacy@coachsearching.com',
+                'legal.terms.title': 'Conditions d\'utilisation',
+                'legal.terms.acceptance.title': '1. Acceptation des conditions',
+                'legal.terms.acceptance.text': 'En accédant et en utilisant CoachSearching, vous acceptez et convenez d\'être lié par ces Conditions d\'utilisation. Si vous n\'acceptez pas ces conditions, veuillez ne pas utiliser notre plateforme.',
+                'legal.terms.earlybird.title': '2. Programme Early-Bird',
+                'legal.terms.earlybird.text': 'Le Programme Early-Bird offre un accès gratuit à vie aux coachs qui s\'inscrivent pendant la période du programme. Cela comprend :',
+                'legal.terms.earlybird.item1': 'Inscription permanente du profil sur la plateforme sans frais',
+                'legal.terms.earlybird.item2': 'Accès aux opportunités de coaching pro-bono',
+                'legal.terms.earlybird.item3': 'Visibilité auprès des clients recherchant des services de coaching',
+                'legal.terms.earlybird.note': 'Remarque : L\'accès gratuit à vie s\'applique aux inscriptions de profil standard. Les fonctionnalités premium ou la publicité peuvent être soumises à des frais supplémentaires à l\'avenir.',
+                'legal.terms.eligibility.title': '3. Éligibilité et inscription',
+                'legal.terms.eligibility.text': 'Pour vous inscrire en tant que coach, vous devez :',
+                'legal.terms.eligibility.item1': 'Avoir au moins 18 ans',
+                'legal.terms.eligibility.item2': 'Posséder des qualifications de coaching valides ou être inscrit dans un programme de formation de coach accrédité',
+                'legal.terms.eligibility.item3': 'Fournir des informations exactes et véridiques',
+                'legal.terms.eligibility.item4': 'Avoir un code d\'invitation valide d\'un formateur de coach certifié',
+                'legal.terms.eligibility.item5': 'Maintenir une présence active et vérifiable sur les médias sociaux',
+                'legal.terms.conduct.title': '4. Conduite et responsabilités du coach',
+                'legal.terms.conduct.text': 'En tant que coach sur notre plateforme, vous acceptez de :',
+                'legal.terms.conduct.item1': 'Maintenir des normes professionnelles et des pratiques de coaching éthiques',
+                'legal.terms.conduct.item2': 'Respecter la confidentialité des clients',
+                'legal.terms.conduct.item3': 'Fournir des informations exactes sur vos qualifications et votre expérience',
+                'legal.terms.conduct.item4': 'Respecter toutes les lois et réglementations applicables',
+                'legal.terms.conduct.item5': 'Ne pas vous engager dans un comportement frauduleux, abusif ou nuisible',
+                'legal.terms.approval.title': '5. Approbation et résiliation du profil',
+                'legal.terms.approval.text': 'CoachSearching se réserve le droit d\'approuver ou de rejeter toute candidature de coach. Nous pouvons suspendre ou résilier les comptes qui violent ces conditions ou adoptent un comportement nuisible à notre communauté.',
+                'legal.terms.liability.title': '6. Limitation de responsabilité',
+                'legal.terms.liability.text': 'CoachSearching est une plateforme connectant les coachs et les clients. Nous ne sommes pas responsables de la qualité des services de coaching, des différends entre coachs et clients, ou de tout dommage résultant de relations de coaching formées via notre plateforme.',
+                'legal.terms.changes.title': '7. Modifications des conditions',
+                'legal.terms.changes.text': 'Nous nous réservons le droit de modifier ces Conditions d\'utilisation à tout moment. L\'utilisation continue de la plateforme après les modifications constitue l\'acceptation des conditions modifiées.',
+                'legal.terms.contact.title': '8. Nous contacter',
+                'legal.terms.contact.text': 'Pour toute question concernant ces Conditions d\'utilisation, contactez-nous à : legal@coachsearching.com',
+                'legal.imprint.title': 'Mentions Légales',
+                'legal.imprint.info.title': 'Informations conformément à § 5 TMG',
+                'legal.imprint.company': 'CoachSearching\n[Your Company Name]\n[Your Street Address]\n[Your City, Postal Code]\n[Your Country]',
+                'legal.imprint.represented.title': 'Représenté par',
+                'legal.imprint.represented.text': '[Managing Director / CEO Name]',
+                'legal.imprint.contact.title': 'Contact',
+                'legal.imprint.contact.phone': 'Téléphone :',
+                'legal.imprint.contact.email': 'E-mail :',
+                'legal.imprint.register.title': 'Inscription au registre',
+                'legal.imprint.register.text': '',
+                'legal.imprint.register.court': 'Tribunal d\'enregistrement :',
+                'legal.imprint.register.number': 'Numéro d\'enregistrement :',
+                'legal.imprint.vat.title': 'Numéro de TVA',
+                'legal.imprint.vat.text': '',
+                'legal.imprint.vat.number': 'Numéro d\'identification TVA selon §27a UStG :',
+                'legal.imprint.dispute.title': 'Résolution des litiges de l\'UE',
+                'legal.imprint.dispute.text': 'La Commission européenne fournit une plateforme de résolution des litiges en ligne (RLL) : https://ec.europa.eu/consumers/odr',
+                'legal.imprint.dispute.email': 'Notre adresse e-mail se trouve ci-dessus dans les mentions légales.',
+                'legal.imprint.consumer.title': 'Résolution des litiges de consommation',
+                'legal.imprint.consumer.text': 'Nous ne sommes pas disposés ou tenus de participer à des procédures de règlement des litiges devant un organisme de règlement des litiges de consommation.',
+                'legal.imprint.liability.title': 'Responsabilité pour le contenu',
+                'legal.imprint.liability.text': 'En tant que fournisseur de services, nous sommes responsables de notre propre contenu sur ces pages conformément à la législation générale. Cependant, nous ne sommes pas obligés de surveiller les informations tierces transmises ou stockées ou de rechercher des circonstances indiquant une activité illégale.',
+                'legal.imprint.links.title': 'Responsabilité pour les liens',
+                'legal.imprint.links.text': 'Notre site web contient des liens vers des sites web externes sur lesquels nous n\'avons aucun contrôle. Par conséquent, nous ne pouvons accepter aucune responsabilité pour ce contenu externe. Le fournisseur ou l\'opérateur respectif des pages est toujours responsable du contenu des pages liées.'
             },
             es: {
                 'header.cta': 'Unirse al Programa',
@@ -1507,7 +2198,100 @@
                 'form.error.invite': 'Código de invitación inválido.',
                 'form.error.generic': 'Ocurrió un error.',
                 'form.error.duplicate': 'Este email ya está registrado.',
-                'form.success': '🎉 ¡Éxito! Tu solicitud ha sido enviada!'
+                'form.success': '🎉 ¡Éxito! Tu solicitud ha sido enviada!',
+                'footer.privacy': 'Política de Privacidad',
+                'footer.terms': 'Términos de Servicio',
+                'footer.imprint': 'Aviso Legal',
+                'legal.back': 'Volver al Inicio',
+                'legal.updated': 'Última actualización: Enero 2025',
+                'legal.privacy.title': 'Política de Privacidad',
+                'legal.privacy.intro.title': '1. Introducción',
+                'legal.privacy.intro.text': 'CoachSearching ("nosotros", "nuestro" o "nos") está comprometido a proteger su privacidad. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos su información cuando utiliza nuestra plataforma.',
+                'legal.privacy.collection.title': '2. Información que recopilamos',
+                'legal.privacy.collection.text': 'Recopilamos información que usted nos proporciona directamente, incluyendo:',
+                'legal.privacy.collection.item1': 'Nombre e información de contacto (dirección de correo electrónico)',
+                'legal.privacy.collection.item2': 'Información profesional (credenciales de coaching, especialidades, experiencia)',
+                'legal.privacy.collection.item3': 'Perfiles de redes sociales con fines de verificación',
+                'legal.privacy.collection.item4': 'Preferencias de comunicación y correspondencia con nosotros',
+                'legal.privacy.usage.title': '3. Cómo usamos su información',
+                'legal.privacy.usage.text': 'Usamos la información recopilada para:',
+                'legal.privacy.usage.item1': 'Crear y gestionar su perfil de coach',
+                'legal.privacy.usage.item2': 'Conectarlo con clientes potenciales',
+                'legal.privacy.usage.item3': 'Verificar sus credenciales de coaching y antecedentes profesionales',
+                'legal.privacy.usage.item4': 'Enviarle actualizaciones importantes sobre nuestra plataforma',
+                'legal.privacy.usage.item5': 'Mejorar nuestros servicios y experiencia de usuario',
+                'legal.privacy.sharing.title': '4. Compartir información',
+                'legal.privacy.sharing.text': 'No vendemos su información personal. Solo podemos compartir su información en las siguientes circunstancias:',
+                'legal.privacy.sharing.item1': 'Con su consentimiento explícito',
+                'legal.privacy.sharing.item2': 'Para cumplir con obligaciones legales',
+                'legal.privacy.sharing.item3': 'Para proteger nuestros derechos y prevenir fraudes',
+                'legal.privacy.sharing.item4': 'Con proveedores de servicios que ayudan a operar nuestra plataforma (bajo estrictos acuerdos de confidencialidad)',
+                'legal.privacy.security.title': '5. Seguridad de datos',
+                'legal.privacy.security.text': 'Implementamos medidas técnicas y organizativas apropiadas para proteger su información personal. Sin embargo, ningún método de transmisión por Internet es 100% seguro, y no podemos garantizar la seguridad absoluta.',
+                'legal.privacy.rights.title': '6. Sus derechos',
+                'legal.privacy.rights.text': 'Usted tiene derecho a:',
+                'legal.privacy.rights.item1': 'Acceder y recibir una copia de sus datos personales',
+                'legal.privacy.rights.item2': 'Corregir información inexacta o incompleta',
+                'legal.privacy.rights.item3': 'Solicitar la eliminación de su información personal',
+                'legal.privacy.rights.item4': 'Oponerse o restringir cierto procesamiento de sus datos',
+                'legal.privacy.rights.item5': 'Retirar el consentimiento en cualquier momento',
+                'legal.privacy.contact.title': '7. Contáctenos',
+                'legal.privacy.contact.text': 'Si tiene preguntas sobre esta Política de Privacidad, contáctenos en: privacy@coachsearching.com',
+                'legal.terms.title': 'Términos de Servicio',
+                'legal.terms.acceptance.title': '1. Aceptación de los términos',
+                'legal.terms.acceptance.text': 'Al acceder y usar CoachSearching, acepta y está de acuerdo en estar sujeto a estos Términos de Servicio. Si no está de acuerdo con estos términos, por favor no use nuestra plataforma.',
+                'legal.terms.earlybird.title': '2. Programa Early-Bird',
+                'legal.terms.earlybird.text': 'El Programa Early-Bird ofrece acceso gratuito de por vida a los coaches que se registren durante el período del programa. Esto incluye:',
+                'legal.terms.earlybird.item1': 'Listado permanente del perfil en la plataforma sin costo',
+                'legal.terms.earlybird.item2': 'Acceso a oportunidades de coaching pro-bono',
+                'legal.terms.earlybird.item3': 'Visibilidad para clientes que buscan servicios de coaching',
+                'legal.terms.earlybird.note': 'Nota: El acceso gratuito de por vida se aplica a listados de perfil estándar. Las funciones premium o publicidad pueden estar sujetas a tarifas adicionales en el futuro.',
+                'legal.terms.eligibility.title': '3. Elegibilidad y registro',
+                'legal.terms.eligibility.text': 'Para registrarse como coach, debe:',
+                'legal.terms.eligibility.item1': 'Tener al menos 18 años de edad',
+                'legal.terms.eligibility.item2': 'Poseer credenciales de coaching válidas o estar en un programa de formación de coaching acreditado',
+                'legal.terms.eligibility.item3': 'Proporcionar información precisa y veraz',
+                'legal.terms.eligibility.item4': 'Tener un código de invitación válido de un formador de coach certificado',
+                'legal.terms.eligibility.item5': 'Mantener una presencia activa y verificable en redes sociales',
+                'legal.terms.conduct.title': '4. Conducta y responsabilidades del coach',
+                'legal.terms.conduct.text': 'Como coach en nuestra plataforma, acepta:',
+                'legal.terms.conduct.item1': 'Mantener estándares profesionales y prácticas éticas de coaching',
+                'legal.terms.conduct.item2': 'Respetar la confidencialidad del cliente',
+                'legal.terms.conduct.item3': 'Proporcionar información precisa sobre sus credenciales y experiencia',
+                'legal.terms.conduct.item4': 'Cumplir con todas las leyes y regulaciones aplicables',
+                'legal.terms.conduct.item5': 'No participar en ningún comportamiento fraudulento, abusivo o dañino',
+                'legal.terms.approval.title': '5. Aprobación y terminación del perfil',
+                'legal.terms.approval.text': 'CoachSearching se reserva el derecho de aprobar o rechazar cualquier solicitud de coach. Podemos suspender o terminar cuentas que violen estos términos o participen en conductas perjudiciales para nuestra comunidad.',
+                'legal.terms.liability.title': '6. Limitación de responsabilidad',
+                'legal.terms.liability.text': 'CoachSearching es una plataforma que conecta coaches y clientes. No somos responsables de la calidad de los servicios de coaching, disputas entre coaches y clientes, o cualquier daño derivado de relaciones de coaching formadas a través de nuestra plataforma.',
+                'legal.terms.changes.title': '7. Cambios en los términos',
+                'legal.terms.changes.text': 'Nos reservamos el derecho de modificar estos Términos de Servicio en cualquier momento. El uso continuo de la plataforma después de los cambios constituye la aceptación de los términos modificados.',
+                'legal.terms.contact.title': '8. Contáctenos',
+                'legal.terms.contact.text': 'Para preguntas sobre estos Términos de Servicio, contáctenos en: legal@coachsearching.com',
+                'legal.imprint.title': 'Aviso Legal',
+                'legal.imprint.info.title': 'Información según § 5 TMG',
+                'legal.imprint.company': 'CoachSearching\n[Your Company Name]\n[Your Street Address]\n[Your City, Postal Code]\n[Your Country]',
+                'legal.imprint.represented.title': 'Representado por',
+                'legal.imprint.represented.text': '[Managing Director / CEO Name]',
+                'legal.imprint.contact.title': 'Contacto',
+                'legal.imprint.contact.phone': 'Teléfono:',
+                'legal.imprint.contact.email': 'Correo electrónico:',
+                'legal.imprint.register.title': 'Entrada en el registro',
+                'legal.imprint.register.text': '',
+                'legal.imprint.register.court': 'Tribunal de registro:',
+                'legal.imprint.register.number': 'Número de registro:',
+                'legal.imprint.vat.title': 'ID de IVA',
+                'legal.imprint.vat.text': '',
+                'legal.imprint.vat.number': 'Número de identificación de IVA según §27a UStG:',
+                'legal.imprint.dispute.title': 'Resolución de disputas de la UE',
+                'legal.imprint.dispute.text': 'La Comisión Europea proporciona una plataforma para la resolución de disputas en línea (RDL): https://ec.europa.eu/consumers/odr',
+                'legal.imprint.dispute.email': 'Nuestra dirección de correo electrónico se encuentra arriba en el aviso legal.',
+                'legal.imprint.consumer.title': 'Resolución de disputas de consumidores',
+                'legal.imprint.consumer.text': 'No estamos dispuestos ni obligados a participar en procedimientos de resolución de disputas ante una junta de arbitraje de consumidores.',
+                'legal.imprint.liability.title': 'Responsabilidad por contenidos',
+                'legal.imprint.liability.text': 'Como proveedor de servicios, somos responsables de nuestro propio contenido en estas páginas de acuerdo con la legislación general. Sin embargo, no estamos obligados a supervisar la información de terceros transmitida o almacenada ni a investigar circunstancias que indiquen actividad ilegal.',
+                'legal.imprint.links.title': 'Responsabilidad por enlaces',
+                'legal.imprint.links.text': 'Nuestro sitio web contiene enlaces a sitios web externos sobre los que no tenemos control. Por lo tanto, no podemos aceptar ninguna responsabilidad por este contenido externo. El proveedor u operador respectivo de las páginas es siempre responsable del contenido de las páginas vinculadas.'
             },
             it: {
                 'header.cta': 'Unisciti al Programma',
@@ -1567,7 +2351,100 @@
                 'form.error.invite': 'Codice invito non valido.',
                 'form.error.generic': 'Si è verificato un errore.',
                 'form.error.duplicate': 'Questa email è già registrata.',
-                'form.success': '🎉 Successo! La tua candidatura è stata inviata!'
+                'form.success': '🎉 Successo! La tua candidatura è stata inviata!',
+                'footer.privacy': 'Informativa sulla Privacy',
+                'footer.terms': 'Termini di Servizio',
+                'footer.imprint': 'Note Legali',
+                'legal.back': 'Torna alla Home',
+                'legal.updated': 'Ultimo aggiornamento: Gennaio 2025',
+                'legal.privacy.title': 'Informativa sulla Privacy',
+                'legal.privacy.intro.title': '1. Introduzione',
+                'legal.privacy.intro.text': 'CoachSearching ("noi", "nostro" o "ci") si impegna a proteggere la tua privacy. Questa Informativa sulla Privacy spiega come raccogliamo, utilizziamo, divulghiamo e proteggiamo le tue informazioni quando utilizzi la nostra piattaforma.',
+                'legal.privacy.collection.title': '2. Informazioni che raccogliamo',
+                'legal.privacy.collection.text': 'Raccogliamo informazioni che ci fornisci direttamente, tra cui:',
+                'legal.privacy.collection.item1': 'Nome e informazioni di contatto (indirizzo email)',
+                'legal.privacy.collection.item2': 'Informazioni professionali (credenziali di coaching, specialità, esperienza)',
+                'legal.privacy.collection.item3': 'Profili di social media a scopo di verifica',
+                'legal.privacy.collection.item4': 'Preferenze di comunicazione e corrispondenza con noi',
+                'legal.privacy.usage.title': '3. Come utilizziamo le tue informazioni',
+                'legal.privacy.usage.text': 'Utilizziamo le informazioni raccolte per:',
+                'legal.privacy.usage.item1': 'Creare e gestire il tuo profilo da coach',
+                'legal.privacy.usage.item2': 'Connetterti con potenziali clienti',
+                'legal.privacy.usage.item3': 'Verificare le tue credenziali di coaching e il tuo background professionale',
+                'legal.privacy.usage.item4': 'Inviarti aggiornamenti importanti sulla nostra piattaforma',
+                'legal.privacy.usage.item5': 'Migliorare i nostri servizi e l\'esperienza utente',
+                'legal.privacy.sharing.title': '4. Condivisione delle informazioni',
+                'legal.privacy.sharing.text': 'Non vendiamo le tue informazioni personali. Possiamo condividere le tue informazioni solo nelle seguenti circostanze:',
+                'legal.privacy.sharing.item1': 'Con il tuo consenso esplicito',
+                'legal.privacy.sharing.item2': 'Per rispettare gli obblighi legali',
+                'legal.privacy.sharing.item3': 'Per proteggere i nostri diritti e prevenire frodi',
+                'legal.privacy.sharing.item4': 'Con fornitori di servizi che ci aiutano a gestire la nostra piattaforma (sotto rigorosi accordi di riservatezza)',
+                'legal.privacy.security.title': '5. Sicurezza dei dati',
+                'legal.privacy.security.text': 'Implementiamo misure tecniche e organizzative appropriate per proteggere le tue informazioni personali. Tuttavia, nessun metodo di trasmissione su Internet è sicuro al 100% e non possiamo garantire la sicurezza assoluta.',
+                'legal.privacy.rights.title': '6. I tuoi diritti',
+                'legal.privacy.rights.text': 'Hai il diritto di:',
+                'legal.privacy.rights.item1': 'Accedere e ricevere una copia dei tuoi dati personali',
+                'legal.privacy.rights.item2': 'Correggere informazioni inesatte o incomplete',
+                'legal.privacy.rights.item3': 'Richiedere la cancellazione delle tue informazioni personali',
+                'legal.privacy.rights.item4': 'Opporti o limitare determinati trattamenti dei tuoi dati',
+                'legal.privacy.rights.item5': 'Revocare il consenso in qualsiasi momento',
+                'legal.privacy.contact.title': '7. Contattaci',
+                'legal.privacy.contact.text': 'Per domande su questa Informativa sulla Privacy, contattaci all\'indirizzo: privacy@coachsearching.com',
+                'legal.terms.title': 'Termini di Servizio',
+                'legal.terms.acceptance.title': '1. Accettazione dei termini',
+                'legal.terms.acceptance.text': 'Accedendo e utilizzando CoachSearching, accetti e acconsenti a essere vincolato da questi Termini di Servizio. Se non accetti questi termini, ti preghiamo di non utilizzare la nostra piattaforma.',
+                'legal.terms.earlybird.title': '2. Programma Early-Bird',
+                'legal.terms.earlybird.text': 'Il Programma Early-Bird offre accesso gratuito a vita ai coach che si registrano durante il periodo del programma. Questo include:',
+                'legal.terms.earlybird.item1': 'Inserimento permanente del profilo sulla piattaforma senza costi',
+                'legal.terms.earlybird.item2': 'Accesso a opportunità di coaching pro-bono',
+                'legal.terms.earlybird.item3': 'Visibilità per i clienti che cercano servizi di coaching',
+                'legal.terms.earlybird.note': 'Nota: L\'accesso gratuito a vita si applica agli inserimenti di profilo standard. Le funzionalità premium o la pubblicità potrebbero essere soggette a costi aggiuntivi in futuro.',
+                'legal.terms.eligibility.title': '3. Idoneità e registrazione',
+                'legal.terms.eligibility.text': 'Per registrarti come coach, devi:',
+                'legal.terms.eligibility.item1': 'Avere almeno 18 anni di età',
+                'legal.terms.eligibility.item2': 'Possedere credenziali di coaching valide o essere iscritto a un programma di formazione per coach accreditato',
+                'legal.terms.eligibility.item3': 'Fornire informazioni accurate e veritiere',
+                'legal.terms.eligibility.item4': 'Avere un codice di invito valido da un formatore di coach certificato',
+                'legal.terms.eligibility.item5': 'Mantenere una presenza attiva e verificabile sui social media',
+                'legal.terms.conduct.title': '4. Condotta e responsabilità del coach',
+                'legal.terms.conduct.text': 'Come coach sulla nostra piattaforma, accetti di:',
+                'legal.terms.conduct.item1': 'Mantenere standard professionali e pratiche di coaching etiche',
+                'legal.terms.conduct.item2': 'Rispettare la riservatezza del cliente',
+                'legal.terms.conduct.item3': 'Fornire informazioni accurate sulle tue credenziali ed esperienza',
+                'legal.terms.conduct.item4': 'Rispettare tutte le leggi e i regolamenti applicabili',
+                'legal.terms.conduct.item5': 'Non impegnarti in comportamenti fraudolenti, abusivi o dannosi',
+                'legal.terms.approval.title': '5. Approvazione e risoluzione del profilo',
+                'legal.terms.approval.text': 'CoachSearching si riserva il diritto di approvare o rifiutare qualsiasi candidatura di coach. Possiamo sospendere o risolvere account che violano questi termini o si impegnano in condotte dannose per la nostra comunità.',
+                'legal.terms.liability.title': '6. Limitazione di responsabilità',
+                'legal.terms.liability.text': 'CoachSearching è una piattaforma che collega coach e clienti. Non siamo responsabili per la qualità dei servizi di coaching, controversie tra coach e clienti, o danni derivanti da rapporti di coaching formati attraverso la nostra piattaforma.',
+                'legal.terms.changes.title': '7. Modifiche ai termini',
+                'legal.terms.changes.text': 'Ci riserviamo il diritto di modificare questi Termini di Servizio in qualsiasi momento. L\'uso continuato della piattaforma dopo le modifiche costituisce l\'accettazione dei termini modificati.',
+                'legal.terms.contact.title': '8. Contattaci',
+                'legal.terms.contact.text': 'Per domande su questi Termini di Servizio, contattaci all\'indirizzo: legal@coachsearching.com',
+                'legal.imprint.title': 'Note Legali',
+                'legal.imprint.info.title': 'Informazioni ai sensi del § 5 TMG',
+                'legal.imprint.company': 'CoachSearching\n[Your Company Name]\n[Your Street Address]\n[Your City, Postal Code]\n[Your Country]',
+                'legal.imprint.represented.title': 'Rappresentato da',
+                'legal.imprint.represented.text': '[Managing Director / CEO Name]',
+                'legal.imprint.contact.title': 'Contatto',
+                'legal.imprint.contact.phone': 'Telefono:',
+                'legal.imprint.contact.email': 'Email:',
+                'legal.imprint.register.title': 'Iscrizione al registro',
+                'legal.imprint.register.text': '',
+                'legal.imprint.register.court': 'Tribunale di registrazione:',
+                'legal.imprint.register.number': 'Numero di registrazione:',
+                'legal.imprint.vat.title': 'Partita IVA',
+                'legal.imprint.vat.text': '',
+                'legal.imprint.vat.number': 'Numero di identificazione IVA ai sensi del §27a UStG:',
+                'legal.imprint.dispute.title': 'Risoluzione delle controversie UE',
+                'legal.imprint.dispute.text': 'La Commissione europea fornisce una piattaforma per la risoluzione delle controversie online (RCO): https://ec.europa.eu/consumers/odr',
+                'legal.imprint.dispute.email': 'Il nostro indirizzo email si trova sopra nelle note legali.',
+                'legal.imprint.consumer.title': 'Risoluzione delle controversie dei consumatori',
+                'legal.imprint.consumer.text': 'Non siamo disposti o obbligati a partecipare a procedure di risoluzione delle controversie davanti a un organismo di conciliazione dei consumatori.',
+                'legal.imprint.liability.title': 'Responsabilità per i contenuti',
+                'legal.imprint.liability.text': 'In qualità di fornitore di servizi, siamo responsabili dei nostri contenuti su queste pagine in conformità con la legislazione generale. Tuttavia, non siamo obbligati a monitorare le informazioni di terze parti trasmesse o archiviate né a indagare su circostanze che indicano attività illegali.',
+                'legal.imprint.links.title': 'Responsabilità per i link',
+                'legal.imprint.links.text': 'Il nostro sito web contiene link a siti web esterni sui quali non abbiamo alcun controllo. Pertanto, non possiamo accettare alcuna responsabilità per questi contenuti esterni. Il rispettivo fornitore o operatore delle pagine è sempre responsabile del contenuto delle pagine collegate.'
             }
         };
 
@@ -2045,6 +2922,76 @@
                 }
             });
         });
+
+        // ===========================
+        // LEGAL PAGES NAVIGATION
+        // ===========================
+
+        const mainPage = document.querySelector('body > header, body > section, body > footer');
+        const legalPageContainer = document.getElementById('legalPage');
+        const privacyPage = document.getElementById('privacyPage');
+        const termsPage = document.getElementById('termsPage');
+        const imprintPage = document.getElementById('imprintPage');
+        const backToHomeBtn = document.getElementById('backToHome');
+
+        // Get all main page elements (everything except legal page)
+        function getMainPageElements() {
+            return Array.from(document.body.children).filter(el =>
+                el.tagName !== 'SCRIPT' && el.id !== 'legalPage'
+            );
+        }
+
+        // Show legal page
+        function showLegalPage(pageId) {
+            // Hide main page
+            getMainPageElements().forEach(el => el.style.display = 'none');
+
+            // Show legal page container
+            legalPageContainer.style.display = 'block';
+
+            // Hide all legal content pages
+            privacyPage.style.display = 'none';
+            termsPage.style.display = 'none';
+            imprintPage.style.display = 'none';
+
+            // Show selected legal page
+            const selectedPage = document.getElementById(pageId);
+            if (selectedPage) {
+                selectedPage.style.display = 'block';
+            }
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show home page
+        function showHomePage() {
+            // Show main page
+            getMainPageElements().forEach(el => el.style.display = '');
+
+            // Hide legal page container
+            legalPageContainer.style.display = 'none';
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Event listeners for footer links
+        document.querySelectorAll('.footer-link[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page') + 'Page';
+                showLegalPage(pageId);
+            });
+        });
+
+        // Event listener for back to home button
+        if (backToHomeBtn) {
+            backToHomeBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                showHomePage();
+            });
+        }
     </script>
 </body>
 </html>
