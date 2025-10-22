@@ -178,6 +178,25 @@
         .language-flag {
             font-size: 1.25rem;
             line-height: 1;
+            min-width: 24px;
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+        }
+
+        /* Fallback style for country codes when emojis aren't supported */
+        .language-flag.no-emoji {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, var(--primary-petrol), var(--petrol-light));
+            color: white;
+            font-size: 0.7rem;
+            line-height: 28px;
+            text-align: center;
+            font-weight: 700;
+            font-family: var(--font-primary);
+            letter-spacing: -0.5px;
         }
 
         .language-arrow {
@@ -231,6 +250,21 @@
 
         .language-option-flag {
             font-size: 1.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+        }
+
+        .language-option-flag.no-emoji {
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            background: linear-gradient(135deg, var(--primary-petrol), var(--petrol-light));
+            color: white;
+            font-size: 0.8rem;
+            line-height: 32px;
+            text-align: center;
+            font-weight: 700;
+            font-family: var(--font-primary);
         }
 
         .language-option-text {
@@ -1546,6 +1580,58 @@
         };
 
         // ===========================
+        // EMOJI SUPPORT DETECTION
+        // ===========================
+
+        // Detect if browser supports flag emojis (many Windows browsers don't)
+        function supportsEmojiFlags() {
+            // Create a canvas to test if flag emoji renders correctly
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            if (!ctx) return false;
+
+            canvas.width = 20;
+            canvas.height = 20;
+
+            // Draw a flag emoji
+            ctx.fillText('🇬🇧', 0, 15);
+
+            // Get the image data - if flag is supported, it should have multiple colors
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+
+            // Check if there's any colored pixels (flag emojis have multiple colors)
+            for (let i = 0; i < imageData.length; i += 4) {
+                if (imageData[i] !== 0 || imageData[i + 1] !== 0 || imageData[i + 2] !== 0) {
+                    return true; // Found some color, emoji likely works
+                }
+            }
+
+            return false; // No colors found, emoji not supported
+        }
+
+        const emojiSupported = supportsEmojiFlags();
+        console.log('Flag emoji support:', emojiSupported);
+
+        // Apply fallback styling if emojis aren't supported
+        if (!emojiSupported) {
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelectorAll('.language-flag, .language-option-flag').forEach(element => {
+                    element.classList.add('no-emoji');
+                    // Replace emoji with country code
+                    const currentText = element.textContent.trim();
+                    // Find which flag this is and replace with code
+                    for (const [lang, meta] of Object.entries(languageMetadata)) {
+                        if (meta.flag === currentText) {
+                            element.textContent = meta.code;
+                            break;
+                        }
+                    }
+                });
+            });
+        }
+
+        // ===========================
         // LANGUAGE DETECTION & SWITCHING
         // ===========================
 
@@ -1630,7 +1716,17 @@
             translatePlaceholders(lang);
 
             const metadata = languageMetadata[lang];
-            document.getElementById('currentFlag').textContent = metadata.flag;
+            const currentFlagElement = document.getElementById('currentFlag');
+
+            // Use country code instead of emoji if not supported
+            if (!emojiSupported) {
+                currentFlagElement.textContent = metadata.code;
+                currentFlagElement.classList.add('no-emoji');
+            } else {
+                currentFlagElement.textContent = metadata.flag;
+                currentFlagElement.classList.remove('no-emoji');
+            }
+
             document.getElementById('currentLanguage').textContent = metadata.code;
 
             document.querySelectorAll('.language-option').forEach(option => {
@@ -1701,7 +1797,13 @@
                     })
                 });
 
-                return await response.json();
+                const result = await response.json();
+
+                // Log the full response for debugging
+                console.log('Auth signup response status:', response.status);
+                console.log('Auth signup response:', result);
+
+                return result;
             }
 
             async insert(table, data) {
@@ -1843,34 +1945,40 @@
 
             try {
                 // Step 1: Validate invitation code
+                console.log('Step 1: Validating invite code:', inviteCode);
                 const isValidCode = await validateInviteCode(inviteCode);
                 if (!isValidCode) {
+                    console.error('Invalid invite code');
                     showError('form.error.invite');
                     return;
                 }
+                console.log('✓ Invite code validated');
 
                 // Step 2: Create user in Supabase Auth
+                console.log('Step 2: Creating auth user for:', email);
                 const randomPassword = Math.random().toString(36).slice(-12) + 'Aa1!';
                 const authResult = await supabase.signUp(email, randomPassword, {
                     full_name: name,
                     email: email
                 });
 
-                console.log('Auth signup result:', authResult);
-
                 // Check for errors in auth response
                 if (authResult.error) {
+                    console.error('Auth error:', authResult.error);
                     throw new Error(authResult.error.message || 'Failed to create account');
                 }
 
                 // Get user ID from the response
                 const userId = authResult.user?.id || authResult.data?.user?.id || null;
 
+                console.log('✓ Auth user created, user_id:', userId);
+
                 if (!userId) {
-                    console.warn('No user ID returned from signup, proceeding without user_id link');
+                    console.warn('Warning: No user ID returned from signup');
                 }
 
                 // Step 3: Insert coach data into database
+                console.log('Step 3: Inserting coach data');
                 const coachData = {
                     name: name,
                     email: email,
@@ -1880,20 +1988,38 @@
                     user_id: userId
                 };
 
-                await supabase.insert('coachsearching_coaches', coachData);
+                console.log('Coach data to insert:', coachData);
+                const insertResult = await supabase.insert('coachsearching_coaches', coachData);
+                console.log('✓ Coach data inserted:', insertResult);
 
                 showSuccess('form.success');
                 form.reset();
 
             } catch (error) {
-                console.error('Signup error:', error);
+                console.error('❌ Signup error details:', {
+                    message: error.message,
+                    error: error,
+                    stack: error.stack
+                });
 
-                if (error.message.includes('already registered') || error.message.includes('already been registered')) {
+                // More specific error handling
+                const errorMsg = error.message.toLowerCase();
+
+                if (errorMsg.includes('already registered') || errorMsg.includes('already been registered')) {
                     showError('form.error.duplicate');
-                } else if (error.message.includes('duplicate key') || error.message.includes('unique constraint')) {
+                } else if (errorMsg.includes('duplicate key') || errorMsg.includes('unique constraint') || errorMsg.includes('already exists')) {
                     showError('form.error.duplicate');
+                } else if (errorMsg.includes('email')) {
+                    showError('form.error.email');
+                } else if (errorMsg.includes('invite') || errorMsg.includes('code')) {
+                    showError('form.error.invite');
                 } else {
+                    // Show the actual error message in development
+                    console.error('Showing generic error for:', error.message);
                     showError('form.error.generic');
+
+                    // Also display the actual error in the console for debugging
+                    alert('Debug Info: ' + error.message + '\n\nCheck browser console for more details.');
                 }
 
             } finally {
