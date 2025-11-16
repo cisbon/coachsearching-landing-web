@@ -1,0 +1,33 @@
+# Environment variables and secrets
+.env
+api/.env
+
+# Backup files
+*.backup
+*.bak
+
+# Uploads
+uploads/
+api/uploads/
+
+# Node modules (if any)
+node_modules/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
