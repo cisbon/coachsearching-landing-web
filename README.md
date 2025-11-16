@@ -1,218 +1,140 @@
-# CoachSearching - Early Bird Coach Landing Page
+# CoachSearching.com
 
-A modern, professional landing page for recruiting early-bird coaches to the CoachSearching platform with lifetime free access.
+Professional coaching platform connecting clients with certified coaches worldwide.
 
-## Features
+## Architecture Overview
 
-- **Modern, Responsive Design**: Professional UI optimized for both desktop and mobile devices
-- **Multi-Language Support**: Automatic language detection with 5 languages (English, German, French, Spanish, Italian)
-- **Supabase Integration**: Complete backend authentication and database setup
-- **Invite Code Validation**: Quality control through required invitation codes
-- **Manual Approval Process**: All signups are reviewed before granting access
-- **No External Dependencies**: Self-contained HTML file with embedded CSS and vanilla JavaScript
+### Frontend
+- **Hosting**: GitHub Pages (static HTML/CSS/JavaScript)
+- **URL**: https://coachsearching.com
+- **Technology**: Pure HTML5, CSS3, JavaScript (ES6+)
+- **SEO Optimized**: Comprehensive meta tags, schema.org markup, semantic HTML
+
+### Backend
+- **Hosting**: https://clouedo.com/coachsearching/api
+- **Technology**: PHP 7.4+ with MySQL
+- **Architecture**: REST API with JWT authentication
+- **Database**: MySQL 5.7+
 
 ## Quick Start
 
-### 1. Set Up Supabase
+### 1. Database Setup
 
-1. Create a free account at [https://app.supabase.com](https://app.supabase.com)
-2. Create a new project
-3. Go to the **SQL Editor** in your Supabase dashboard
-4. Copy the entire contents of `supabase-setup.sql`
-5. Paste it into the SQL Editor and click **Run**
-6. Wait for the confirmation message
-
-### 2. Configure the Landing Page
-
-1. Open `index.html` in a text editor
-2. Find the JavaScript section near the bottom of the file
-3. Locate these two configuration variables:
-
-```javascript
-const SUPABASE_URL = 'YOUR_SUPABASE_PROJECT_URL';
-const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+Import the MySQL schema:
+```bash
+mysql -u your_user -p your_database < mysql-schema.sql
 ```
 
-4. Replace the values with your actual Supabase credentials:
-   - Go to **Settings > API** in your Supabase dashboard
-   - Copy the **Project URL** and paste it as `SUPABASE_URL`
-   - Copy the **anon/public key** and paste it as `SUPABASE_ANON_KEY`
+### 2. Backend Configuration
+
+1. Navigate to API directory and copy environment file:
+```bash
+cd api
+cp .env.example .env
+```
+
+2. Edit `.env` with your credentials:
+   - Database settings
+   - JWT secret key
+   - SMTP configuration
+   - Stripe API keys
+   - CORS origins
+
+3. Set proper permissions:
+```bash
+chmod 755 api/
+chmod 644 api/*.php
+chmod 600 api/.env
+```
 
 ### 3. Deploy
 
-You can deploy this landing page to any static hosting service:
+- **Frontend**: Push to GitHub Pages
+- **Backend**: Upload `api/` directory to https://clouedo.com/coachsearching/api
+- **Database**: Import `mysql-schema.sql` to your MySQL server
 
-- **Netlify**: Drag and drop the `index.html` file
-- **Vercel**: Upload via CLI or GitHub integration
-- **GitHub Pages**: Push to a repository and enable Pages
-- **Any Web Server**: Upload the `index.html` file to your server
+## User Roles
 
-## Database Schema
+1. **Guest** - Browse coaches, take questionnaire
+2. **User** - Book sessions, write reviews, follow coaches
+3. **Business** - Team management, bulk bookings
+4. **Coach** - Profile, sessions, articles, messaging
+5. **Admin** - Full control, assign delegates
+6. **Admin Delegate** - Dashboard access (no delegate management)
 
-### Tables
+## API Documentation
 
-#### `coachsearching_invite_codes`
-Stores valid invitation codes that coaches must use to sign up.
+### Base URL
+`https://clouedo.com/coachsearching/api`
 
-| Column | Type | Description |
-|--------|------|-------------|
-| id | UUID | Primary key |
-| code | TEXT | Unique invitation code |
-| created_by | TEXT | Name of the coach trainer who created it |
-| is_active | BOOLEAN | Whether the code can still be used |
-| max_uses | INTEGER | Maximum number of times code can be used |
-| current_uses | INTEGER | How many times it has been used |
-| expires_at | TIMESTAMP | Optional expiration date |
-
-#### `coachsearching_coaches`
-Stores coach registration data pending approval.
-
-| Column | Type | Description |
-|--------|------|-------------|
-| id | UUID | Primary key |
-| user_id | UUID | Reference to auth.users |
-| name | TEXT | Coach's full name |
-| email | TEXT | Coach's email (unique) |
-| social_link | TEXT | LinkedIn or professional profile URL |
-| invite_code | TEXT | The code they used to sign up |
-| approved | BOOLEAN | Whether admin approved (default: false) |
-| approved_at | TIMESTAMP | When they were approved |
-| approved_by | UUID | Admin who approved them |
-
-## Managing Coaches
-
-### Approving New Coaches
-
-1. Go to your Supabase dashboard
-2. Navigate to **Table Editor > coachsearching_coaches**
-3. Find coaches where `approved = false`
-4. Click on the row to edit
-5. Change `approved` to `true`
-6. Save the changes
-
-The `approved_at` timestamp will be set automatically by a database trigger.
-
-### Adding New Invite Codes
-
-Run this SQL in the Supabase SQL Editor:
-
-```sql
-INSERT INTO public.coachsearching_invite_codes (code, created_by, is_active, max_uses)
-VALUES ('YOUR-CODE-HERE', 'Trainer Name', true, 10);
+### Authentication
+All authenticated endpoints require JWT token in Authorization header:
+```
+Authorization: Bearer YOUR_JWT_TOKEN
 ```
 
-### Viewing Pending Coaches
+### Key Endpoints
 
-Use the `coachsearching_pending_coaches` view:
+**Auth**
+- `POST /auth/register` - Register user
+- `POST /auth/login` - Login
+- `GET /auth/me` - Get current user
 
-```sql
-SELECT * FROM public.coachsearching_pending_coaches;
-```
+**Coaches**
+- `GET /coaches` - List/search coaches
+- `GET /coaches/profile?id={id}` - Get coach profile
 
-## Customization
+**Bookings**
+- `POST /bookings/create` - Create booking
+- `POST /bookings/confirm` - Confirm booking (coach)
+- `POST /bookings/cancel` - Cancel booking
 
-### Colors
+**Questionnaire**
+- `GET /questionnaire` - Get questions
+- `POST /questionnaire/submit` - Submit and get matches
 
-The primary brand color is **petrol (#006266)**. To change colors, edit the CSS variables in the `<style>` section:
+See full API documentation in the code comments.
 
-```css
-:root {
-    --primary-petrol: #006266;
-    --petrol-light: #008B8F;
-    --petrol-dark: #004A4D;
-    /* ... more colors */
-}
-```
+## Default Admin Account
 
-### Copy/Text
+**Email**: admin@coachsearching.com  
+**Password**: password
 
-All text content is in the HTML body. Search for specific headings or paragraphs and update as needed.
+⚠️ **CHANGE THIS IMMEDIATELY IN PRODUCTION!**
 
-### Form Fields
+## Security
 
-To add or remove form fields:
+- JWT authentication
+- Bcrypt password hashing
+- SQL injection protection
+- XSS prevention
+- CORS configuration
+- Protected .env files
+- File upload validation
 
-1. Add/remove the HTML input in the form
-2. Update the JavaScript form handler to capture the new field values
-3. Update the `coachsearching_coaches` table schema in Supabase if adding new fields
+## SEO Features
 
-## Security Features
+- Semantic HTML5
+- Rich meta tags
+- Open Graph support
+- Schema.org markup
+- Canonical URLs
+- Mobile responsive
+- Fast loading
 
-- **Row Level Security (RLS)**: Enabled on all tables
-- **Read-Only Invite Codes**: Users can only check validity, not modify
-- **Self-Approval Prevention**: Users cannot approve their own accounts
-- **Input Validation**: Email format, URL format, and required fields are validated
-- **Invite Code Expiration**: Optional expiration dates for codes
+## Next Steps
 
-## Multi-Language Support
-
-The landing page supports 5 languages with intelligent automatic detection:
-
-### Supported Languages
-
-- **English (EN)** 🇬🇧
-- **German (DE)** 🇩🇪
-- **French (FR)** 🇫🇷
-- **Spanish (ES)** 🇪🇸
-- **Italian (IT)** 🇮🇹
-
-### How It Works
-
-1. **IP-Based Detection**: The page automatically detects the visitor's location using their IP address and sets the appropriate language
-2. **Browser Fallback**: If IP detection fails, it falls back to the browser's language settings
-3. **Manual Override**: Users can manually switch languages using the dropdown in the header
-4. **Persistent Preference**: The selected language is saved to localStorage for future visits
-
-### Language Detection Priority
-
-1. Saved preference (localStorage)
-2. IP-based geolocation (via ipapi.co)
-3. Browser language settings
-4. English (default fallback)
-
-### Country-to-Language Mapping
-
-- **German**: Germany, Austria, Switzerland
-- **French**: France, Belgium, Luxembourg
-- **Spanish**: Spain, Mexico, Argentina, Colombia, Chile (and other Spanish-speaking countries)
-- **Italian**: Italy, San Marino, Vatican City
-- **English**: UK, US, Canada, Australia, New Zealand, Ireland (and all other countries)
-
-## Optional Enhancements
-
-### Email Notifications
-
-Set up Supabase Edge Functions to send email notifications when:
-- A new coach signs up (notify admins)
-- A coach is approved (notify the coach)
-- Trigger on UPDATE of `coachsearching_coaches` table when `approved = true`
-
-### Admin Dashboard
-
-Build a custom admin panel to:
-- View pending coaches from `coachsearching_pending_coaches` view
-- Approve/reject coaches with one click
-- Generate new invite codes for `coachsearching_invite_codes`
-- View analytics (signups over time, etc.)
-
-### Rate Limiting
-
-Consider adding rate limiting to prevent spam signups:
-- Use Supabase Edge Functions with middleware
-- Or implement at the hosting level (Netlify/Vercel functions)
-
-## Files Included
-
-- `index.html` - Complete landing page (HTML + CSS + JS)
-- `supabase-setup.sql` - Database setup script
-- `README.md` - This documentation file
+1. Create additional frontend pages (coaches.html, questionnaire.html, etc.)
+2. Populate database with sample data
+3. Configure email notifications
+4. Set up Stripe payments
+5. Deploy to production
+6. Change default passwords
 
 ## Support
 
-For issues or questions:
-- Check the Supabase documentation: [https://supabase.com/docs](https://supabase.com/docs)
-- Review the commented code in `index.html` and `supabase-setup.sql`
+For questions or issues, contact the development team.
 
 ## License
 
-All rights reserved - CoachSearching.com
+Proprietary - All rights reserved
